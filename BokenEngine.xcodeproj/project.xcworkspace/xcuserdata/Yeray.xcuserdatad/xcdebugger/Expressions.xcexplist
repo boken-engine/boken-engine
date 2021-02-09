@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "StoryParser.decodeJSON():StoryParser.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "testMode">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GesturesManagerTests.testRemoveSwipeGesturesRecognizers():GesturesManagerTests.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "mockedView.gestureRecognizers">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "StoryParser.readLocalFile(resourceName:):StoryParser.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Bundle(for: type(of: self))">
+            </PersistentString>
+            <PersistentString
+               value = "Bundle.main">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
