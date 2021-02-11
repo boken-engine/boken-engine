@@ -241,7 +241,5 @@ Not at the moment. It relies on XCode and associated libraries (SpriteKit, Scene
 - Can I use it for commercial projects?
 
 Yes, you can, but please, check the License details (TBD) to know the details.
- 
->>>>>>> ed5c23302e5b58df5f6f6bff1b31a97b8af38683
 
  
