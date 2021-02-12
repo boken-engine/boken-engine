@@ -1,0 +1,1 @@
+This folder is for additional project documentation. For README.md, contributions guidelines and license, please refer to the repository root.
