@@ -52,6 +52,7 @@ Whenever is possible, new features should have Unit Tests to maintain (or increa
 
 New documentation contributions are also welcomed. They can improve the official documentation, add new examples or tutorials.
 The new documents must be added to the "docs" folder, and they must be created or modified using the same issue - pull request method as the code contributions.
+Document format should be MarkDown unless an alternative format is really necessary. Naming should adhere to underscore [kebab-case](https://en.wikipedia.org/wiki/Letter_case#Special_case_styles).
 
 ## Styleguides
 
