@@ -40,10 +40,10 @@ When creating a improvement issue, please provide the following information:
 -   **Use a clear and descriptive title**  for the issue to identify the suggestion.
 -   **Provide a description of the suggested enhancement**  as detailed as possible
 -   **Explain why this improvement would be useful**  to most users 
--
+
 ### Committing code to an issue
 
-Before writing any code for the repository, please review the Swith styleguides. Please, check that the new code will not compromise the quality, stability or security of the codebase.
+Before writing any code for the repository, please review the Swift styleguides. Please, check that the new code will not compromise the quality, stability or security of the codebase.
 Any new code is added to the repository using Pull Requests that must be reviewed and approved by the community before being merged or rebased to the repository.
 When creating the commit and the pull request, please refer also to the section Issues, Commits and Pull Requests.
 Whenever is possible, new features should have Unit Tests to maintain (or increase) the code test coverage before adding it.
