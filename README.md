@@ -79,7 +79,7 @@ We suggest putting all the specific content of the application (Story descriptio
 
 The contents the application is going to show (that is: the description of all the slides) are described by a JSON file called "StoryDescription.json", and must be anywhere within the application structure.
 
-The complete format of this file is explained in the [Content Creation Guide](docs/contents-creation-guide.md), but this is a simple example of a StoryDescription.json:
+The complete format of this file is explained in the [Content Creation Guide](doc/contents-creation-guide.md), but this is a simple example of a StoryDescription.json:
 
 ```JSON
 {
@@ -188,7 +188,7 @@ The complete format of this file is explained in the [Content Creation Guide](do
 
 With the Boken Engine, this content description, along with an asset catalog with the "SuperBackgroundMusicFile.mp3" audio file and the "cuteBackground.jpg" image file, will generate a iOS App that will present to the user a first view with an image backgroung, the "Welcome to my Cute App!" label and two buttoms: "Credits" and "Start". If the user clicks on "start", the second slide (the one with the "Hello World" slide) will show up. If the user clicks on the right side of the screen, the third slide will be presented.
 
-For more information about content creation, refer to the [Content Creation Guide](docs/contents-creation-guide.md).
+For more information about content creation, refer to the [Content Creation Guide](doc/contents-creation-guide.md).
 
 ### 6.5 How to run tests
 
@@ -211,7 +211,7 @@ If the Scene Manager is initialized with a string, instead of fetching the JSON 
 
 #### 6.6.3 Transformations
 
-The images and the text labels can be animated via "transformations". Currently, there are two kinds of transformations: scale (size) and rotation. They can be combined. Each transformation is defined by its type, the final value for the property (scale or rotation) and how many seconds it takes to reach this value. Full description of the transformations syntax can be found at the [Content Creation Guide](docs/contents-creation-guide.md).
+The images and the text labels can be animated via "transformations". Currently, there are two kinds of transformations: scale (size) and rotation. They can be combined. Each transformation is defined by its type, the final value for the property (scale or rotation) and how many seconds it takes to reach this value. Full description of the transformations syntax can be found at the [Content Creation Guide](doc/contents-creation-guide.md).
 
 ## 7. How to contribute
 
