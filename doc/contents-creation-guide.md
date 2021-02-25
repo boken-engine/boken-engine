@@ -23,7 +23,7 @@ This JSON file must be included in the project along with catalogues with assets
 
 - *Scenes*: The views in which are organized the contents. You can think of them as "slides". Each scene is composed of Elements, Navigations Buttons, Branch Buttons and an optional audio track that will play when the user gets to this scene.
 - *Scene Elements*: The individual entities that are displayed within the scene. At the moment of writing this, they can be images (loaded from JPEG files), text labels or rectangular coloured shapes.
-- *Transformations*: Animations that can be applied to some properties of certain elements. Currently, scale and rotation are supported for image and text elements.
+- *Transformations*: The images and the text labels can be animated via "transformations". Currently, there are two kinds of transformations: scale (size) and rotation. They can be combined. Each transformation is defined by its type, the final value for the property (scale or rotation) and how many seconds it takes to reach this value. 
 - *Navigation Buttons*: Buttons at the bottom of the scene that can get you to the previous and the next scene. Depending on what the content creator decides, not all buttons (maybe none) may be present at a particular scene.
 - *Branches Buttons*: Buttons that gets the user to a particular scene, not necesarilly the next or previous one. It can be used to make branches in the storyline of the contents and introduce non-linearity.
 
@@ -48,7 +48,7 @@ By default, all properties refer to the portrait (vertical) version of the appli
 The content description file must contain a valid "application definition" object, the structure of which is defined below, along with its sub-structures. If you are not familiarized with basic data types, please refer to "Appendix A: basic data types"
 
 ### Application definition:
-```JSON
+```
     {
         "appTitle": String
         "scenes": [SceneDescription]
@@ -56,7 +56,7 @@ The content description file must contain a valid "application definition" objec
     }
 ```
 ### Scene description:
-```JSON
+```
     {
     	"sceneId": String
         "elements": Elements
@@ -67,20 +67,20 @@ The content description file must contain a valid "application definition" objec
     }
 ```
 ### Branch
-```JSON
+```
     {
         "label": String
         "target": String // Reference to the sceneId of the destination scene
     }
 ```
 ### Elements:
-```JSON
+```
     {
         "elementsArray": [subclass-of-ElementDescription]
     }
 ```
 ### ElementDescription 
-```JSON
+```
     {
         "type": String // Possible values: "textLabel", "image", "shape"
         "posX": Float
@@ -90,7 +90,7 @@ The content description file must contain a valid "application definition" objec
     }
 ```
 ### ShapeDescription (subclass of ElementDescription)
-```JSON
+```
     {	
         "width": Float
         "height": Float
@@ -100,7 +100,7 @@ The content description file must contain a valid "application definition" objec
     }
 ```
 ### ImageDescription (subclass of ElementDescription)
-```JSON
+```
     {
         "imageFile": String // Name of a JPEG resource within the Bundle
         "scale": Float
@@ -110,7 +110,7 @@ The content description file must contain a valid "application definition" objec
 ```
 
 ### TextLabelDescription (subclass of ElementDescription)
-```JSON
+```
     {
         "content": String
         "fontSize": Float
@@ -121,7 +121,7 @@ The content description file must contain a valid "application definition" objec
 ```
 
 ### TransformationDescription: Decodable 
-```JSON
+```
     {
         "type": String  // Possible values: "scale", "rotation"
         "toValue": Float
