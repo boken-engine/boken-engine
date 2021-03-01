@@ -40,20 +40,38 @@ Boken Engine is not a stand-alone application. This is a Framework: a piece of s
 
 ### 6.1 Basic usage
 
-  1. Download the library from its source repository. Save it in any folder of your hard drive.
-  2. Create your project using XCode
-  3. Link the framework with your project (see "6.2 How to link the framework with a new project")
-  4. Initialize the framework (see "6.3 Initializing the framework for its usage")
-  5. Create the contents file and put it along with the image/audio assets into the project (see "6.4 Content creation")
-  6. (optional) Add any additional feature to your application
-  . Publish your application 
+  1. Create your project using XCode
+  2. Link the framework with your project (see "6.2 How to link the framework with a new project")
+  3. Initialize the framework (see "6.3 Initializing the framework for its usage")
+  4. Create the contents file and put it along with the image/audio assets into the project (see "6.4 Content creation")
+  5. (optional) Add any additional feature to your application
+  6. Publish your application 
 
-### 6.2 How to link the framework with a new project
+### 6.2 Linking the framework in a new project
 
+#### Manually
+
+- Download the library from its [source repository](https://github.com/boken-engine/boken-engine). Save it in any folder of your hard drive.
 - Create or open the project you want to use the framwework with
 - In this project, drag and drop the framework project file (BokenEngine.xcodeproj) to anywhere within the Project Navigator tree
 - Add the library to the "Link Binary with Libraries" section of the target's Build Phases tab, using the "+" icon
 
+#### Using Carthage
+
+- Add this line to your Cartfile (or create it with this content):
+```
+github "boken-engine/boken-engine" "master"
+```
+- Build the Carthage managed dependencies:
+```
+carthage update --platform iOS
+```
+- Add the generated Carthage/Build/iOS/BokenEngine.framework file to the "Linked Frameworks and Libraries" of your project "General" setup tab.
+- On the "Build Phases" setup tab, create a new Run Script Phase using the "+" button and add this line on the script block:
+```
+/usr/local/bin/carthage copy-frameworks
+```
+- Add the framework (Carthage/Build/iOS/BokenEngine.framework) to the "input files" control
 
 ### 6.3 Initializing the framework for its usage
 
