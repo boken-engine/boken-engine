@@ -16,15 +16,30 @@
 
 Boken Engine is a Framework written in Swift to make slide-based visual stories Apps. This document is a step-by-step guide to use it for creating your own project.
 
-## Download the framework
+## Manually linking the framework to a project
 
-Download or clone the framework XCode project from its [GitHub repository](https://github.com/boken-engine/boken-engine).
-
-## Linking the framework to a project
+First, download or clone the framework XCode project from its [GitHub repository](https://github.com/boken-engine/boken-engine).
 
 Now you have to link the framework to your XCode project. To do so, drag and drop the framework project file (BokenEngine.xcodeproj) to anywhere within the Project Navigator tree. Then, add the library to the "Link Binary with Libraries" section of the target's Build Phases tab, using the "+" icon.
 
 This way, the framework will be built into your App, and also, you will be able to check the framework source files from within your project. This can be useful to check available methods of a class, enum values or the contents description structs.
+
+## Link it using Carthage
+
+- Add this line to your Cartfile (or create it with this content):
+```
+github "boken-engine/boken-engine" "master"
+```
+- Build the Carthage managed dependencies:
+```
+carthage update --platform iOS
+```
+- Add the generated Carthage/Build/iOS/BokenEngine.framework file to the "Linked Frameworks and Libraries" of your project "General" setup tab.
+- On the "Build Phases" setup tab, create a new Run Script Phase using the "+" button and add this line on the script block:
+```
+/usr/local/bin/carthage copy-frameworks
+```
+- Add the framework (Carthage/Build/iOS/BokenEngine.framework) to the "input files" control
 
 ## Framework basics
 
