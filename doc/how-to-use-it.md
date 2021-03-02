@@ -39,7 +39,7 @@ carthage update --platform iOS
 ```
 /usr/local/bin/carthage copy-frameworks
 ```
-- Add the framework (Carthage/Build/iOS/BokenEngine.framework) to the "input files" control
+- Add the framework (**$(SRCROOT)/Carthage/Build/iOS/BokenEngine.framework**) to the "input files" control
 
 ## Framework basics
 
@@ -61,6 +61,12 @@ The main class of the Engine is the SceneManager.
 The typical BokenEngine application uses it to invoke the contents description file parsing and present the first slide.
 
 A good place to put this initialization code this is in the viewDidLoad method of the application ViewController class (ViewController.swift file), but it can be put in any other block executed during the application loading. All that is needed is a reference to a view of the application in which the contents can be rendered.
+
+First of all, remember to import the Boken Engine where it will be initialized:
+
+```swift
+	import BokenEngine
+```
 
 The particular sentences with what this is accomplished are:
 
@@ -87,6 +93,8 @@ And when the application is ready for it, the first slide can be rendered using 
 Putting all together:
 
 ```swift
+import BokenEngine
+
 class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,6 +108,18 @@ class ViewController: UIViewController {
 ```
 
 This should be enough for most applications, as the sceneManager itself will take care of scene changes.
+
+
+#### Main view class setup
+
+The view in which the contents are to be created must have SpriteKit capabilities, the library Boken Engine uses for all content rendering.
+
+In order to accomplish this, the Main View instance must have SKView class. To do so, please follow the following steps:
+
+- On the project navigator, click on the main view storyboard (by default, "Main.storyboard")
+- Click on the View element, usually under the "View Controller Scene" and "View Controller" elements.
+- Click on the Identity Inspector.
+- Change the Custom class to SKView.
 
 ## Creating the contents
 

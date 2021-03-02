@@ -4,9 +4,9 @@ An iOS Swift framework for creating slides-based, non-linear visual stories and 
 
 ## 1. Description
 
-BOKEN (from Swedish: The Book; also from Japanese 冒険 - Bōken: Adventure) ENGINE is a Swift Framework with which any user, only with a few lines of codes, can generate full fledged visual stories or slide based presentations for iOS devices.
+BOKEN (from Swedish: The Book; also from Japanese 冒険 - Bōken: Adventure) ENGINE is a Swift Framework with which any user, only with a few lines of codes, can generate full fledged visual stories or slide based presentations for iOS devices. It is based on SpriteKit.
 
-The user just have to provide a human readable JSON description with some predefined properties, the image and sound assets, and initialize the framework within the project with just a few lines.
+The user just has to provide a human readable JSON description with some predefined properties, the image and sound assets, and initialize the framework within the project with just a few lines.
 
 ## 2. What is it intended for?
 
@@ -71,7 +71,7 @@ carthage update --platform iOS
 ```
 /usr/local/bin/carthage copy-frameworks
 ```
-- Add the framework (Carthage/Build/iOS/BokenEngine.framework) to the "input files" control
+- Add the framework (**$(SRCROOT)/Carthage/Build/iOS/BokenEngine.framework**) to the "input files" control
 
 ### 6.3 Initializing the framework for its usage
 
@@ -79,6 +79,8 @@ The main class of the Engine is the SceneManager. To use the engine, just instan
 Typically, this is done in the viewDidLoad method of the ViewController class (ViewController.swift file) this way:
 
 ```swift
+import BokenEngine
+
 class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,6 +92,17 @@ class ViewController: UIViewController {
     }
 }
 ```
+
+#### Main view class setup
+
+The view in which the contents are to be created must have SpriteKit capabilities, the library Boken Engine uses for all content rendering.
+
+In order to accomplish this, the Main View instance must have SKView class. To do so, please follow the following steps:
+
+- On the project navigator, click on the main view storyboard (by default, "Main.storyboard")
+- Click on the View element, usually under the "View Controller Scene" and "View Controller" elements.
+- Click on the Identity Inspector.
+- Change the Custom class to SKView.
 
 ### 6.4 Content creation
 
