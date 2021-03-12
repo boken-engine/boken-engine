@@ -50,6 +50,20 @@ jobs:
     runs-on: macos-latest
     needs: build
     steps:
+    
+      - name: Set Default Scheme
+        run: |
+          # 1. Get available schemes in the project
+          scheme_list=$(xcodebuild -list -json | tr -d "\n")
+          
+          # 2. Get the first scheme name parsing the JSON with Ruby and selecting the first element in the matrix
+          default=$(echo $scheme_list | ruby -e "require 'json'; puts JSON.parse(STDIN.gets)['project']['targets'][0]")
+
+          # 3. Store and displays the default scheme
+          echo $default | cat >default
+          echo Using default scheme: $default
+
+    
       - name: Test
         env:
           scheme: ${{ 'default' }}
