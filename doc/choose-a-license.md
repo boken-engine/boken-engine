@@ -154,9 +154,7 @@ After that we realized that was better to invest some time in thinking about the
 
 Although a **permissive license** may seem ideal because of the freedom it provides, both for the creator of the software and the user, at the same time it also provides the freedom to the latter to modify and distribute it under different terms and without source code. That means this piece of **source code could be easily (and legally) turned into a close source software** (proprietary program) without the obligation of sharing it, which in the end weakens the open source community.
 
-> Schematic representation of license directionality, from [A Quick Guide to Software Licensing for the Scientist-Programmer
->
-> > ](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1002598, © Morin et al.)
+> Schematic representation of license directionality, from [A Quick Guide to Software Licensing for the Scientist-Programmer](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1002598), © Morin et al.
 
 ![Schematic representation of license directionality](images/licenses-directionality.png)
 
