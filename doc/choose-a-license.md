@@ -63,8 +63,8 @@ In addition to the core freedoms described above, some open source licenses incl
 
 Below is a list of licenses in descending order **from strong copyleft at the top to completely non-copyleft at the bottom**:
 
-- **GNU General Public License version 3** [GPL-3.0](https://www.gnu.org/licenses/gpl.html)
 - **GNU Affero General Public License version 3** [AGPL-3.0](https://www.gnu.org/licenses/agpl.html)
+- **GNU General Public License version 3** [GPL-3.0](https://www.gnu.org/licenses/gpl.html)
 - **Mozilla Public License 2.0** [MPL-2.0](https://www.mozilla.org/MPL/)
 - **GNU Library or "Lesser" General Public License version 3** [LGPL-3.0](https://www.gnu.org/licenses/lgpl.html)
 - **MIT license** [MIT](https://opensource.org/licenses/MIT)
