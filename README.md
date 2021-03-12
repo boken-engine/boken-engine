@@ -276,3 +276,5 @@ Yes, you can, but please, check the [License details](LICENSE) to know the detai
 ## 9. License
 
 The Boken Engine framework is available under the [Mozilla Public License Version 2.0](https://mozilla.org/MPL/2.0/).
+
+If you want to know more about this choice you can check the documentation about this on [choose-a-license.md](/doc/choose-a-license.md).
