@@ -271,6 +271,8 @@ Not at the moment. It relies on XCode and associated libraries (SpriteKit, Scene
 
 - Can I use it for commercial projects?
 
-Yes, you can, but please, check the License details (TBD) to know the details.
+Yes, you can, but please, check the [License details](LICENSE) to know the details.
 
- 
+## 9. License
+
+The Boken Engine framework is available under the [Mozilla Public License Version 2.0](https://mozilla.org/MPL/2.0/).
