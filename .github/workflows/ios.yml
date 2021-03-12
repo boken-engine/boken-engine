@@ -10,6 +10,8 @@ jobs:
   build:
     name: Build default scheme for further testing
     runs-on: macos-latest
+    outputs:
+      scheme: $scheme
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -53,6 +55,9 @@ jobs:
           scheme: ${{ 'default' }}
           platform: ${{ 'iOS Simulator' }}
         run: |
+          
+          $scheme = ${{needs.build.outputs.scheme}}
+
           # 1. Get the list of available iPhone simulators, and get the first one
           device=`instruments -s -devices | grep -oE 'iPhone.*?[^\(]+' | head -1 | awk '{$1=$1;print}'`
 
