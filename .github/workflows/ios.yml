@@ -15,7 +15,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          scheme_list_generator: xcodebuild -list -json | tr -d "\n" 
+          scheme_list_generator: ${{ 'xcodebuild -list -json | tr -d "\n"' }}
       - name: Set Default Scheme
         run: |
           scheme_list=$($INPUT_SCHEME_LIST_GENERATOR)
