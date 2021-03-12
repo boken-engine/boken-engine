@@ -50,7 +50,8 @@ jobs:
     runs-on: macos-latest
     needs: build
     steps:
-    
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Set Default Scheme
         run: |
           # 1. Get available schemes in the project
