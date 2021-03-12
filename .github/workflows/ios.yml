@@ -10,13 +10,13 @@ jobs:
   build:
     name: Build and Test default scheme using any available iPhone simulator
     runs-on: macos-latest
-
+          
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        with:
-          scheme_list_generator: ${{ 'xcodebuild -list -json | tr -d "\n"' }}
       - name: Set Default Scheme
+        env:
+          scheme_list_generator: ${{ 'xcodebuild -list -json | tr -d "\n"' }}
         run: |
           echo $INPUT_SCHEME_LIST_GENERATOR
           scheme_list=$($INPUT_SCHEME_LIST_GENERATOR)
