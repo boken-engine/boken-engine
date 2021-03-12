@@ -18,6 +18,7 @@ jobs:
           scheme_list_generator: ${{ 'xcodebuild -list -json | tr -d "\n"' }}
       - name: Set Default Scheme
         run: |
+          echo $INPUT_SCHEME_LIST_GENERATOR
           scheme_list=$($INPUT_SCHEME_LIST_GENERATOR)
           default=$(echo $scheme_list | ruby -e "require 'json'; puts JSON.parse(STDIN.gets)['project']['targets'][0]")
           echo $default | cat >default
