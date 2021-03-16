@@ -1,11 +1,10 @@
-//
-//  Slide.swift
-//  Boken Engine
-//
-//  Created by Yeray on 30/10/2020.
-//  Copyright © 2020 Hyve. All rights reserved.
-//
-//  Element subtypes decoding method from https://bit.ly/3rMAkZY
+/* Copyright 2021 The Boken Authors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
+
+/* Element subtypes decoding method from https://bit.ly/3rMAkZY */
 
 enum ElementType: String, Decodable {
     case textLabel
