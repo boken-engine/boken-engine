@@ -1,4 +1,4 @@
-name: iOS starter workflow
+name: Build, test, lint and coverage measurement
 
 on:
   push:
