@@ -287,6 +287,10 @@ No. JSON is a text-based format that can be written with any text editor. Howeve
 
 Not at the moment. It relies on XCode and associated libraries (SpriteKit, SceneKit...)
 
+- Is there any Boken-based application I can check as an example?
+
+Yes, you can check and fork [15 Universe Facts](https://github.com/boken-engine/15-universe-facts) as a sample application. It includes a GitHub Actions workflow that builds and generates an IPA file.
+
 - Can I use it for commercial projects?
 
 Yes, you can, but please, check the [License details](LICENSE) to know the details.
