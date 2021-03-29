@@ -10,6 +10,7 @@
 8. [Running tests](#running-tests)
 9. [Building the application](#building-the-application)
 10. [Distribution](#distribution)
+11. [Sample application](#sample-application)
 
 
 ## Introduction
@@ -160,4 +161,4 @@ If you want to distribuite an iOS application used with Boken, first please make
 
 ## Sample application
 
-A boken-based application, ["15 facts of the Universe"](https://github.com/boken-engine/15-universe-facts), can be used to fork and modify. It includes a GitHub Actions workflow that builds and generates an IPA file.
+A boken-based application, ["The 15 most mind-blowing facts about the universe"](https://github.com/boken-engine/15-universe-facts), can be used to fork and modify. It includes a GitHub Actions workflow that builds and generates an IPA file.
