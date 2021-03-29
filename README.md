@@ -58,6 +58,8 @@ Boken Engine is not a stand-alone application. This is a Framework: a piece of s
 
 #### Using Carthage
 
+Follow the official [Carthage procedure for building platform-specific framework bundles](https://github.com/Carthage/Carthage#if-youre-building-for-ios-tvos-or-watchos):
+
 - Add this line to your Cartfile (or create it with this content):
 ```
 github "boken-engine/boken-engine" "master"
@@ -66,12 +68,28 @@ github "boken-engine/boken-engine" "master"
 ```
 carthage update --platform iOS
 ```
+
 - Add the generated Carthage/Build/iOS/BokenEngine.framework file to the "Linked Frameworks and Libraries" of your project "General" setup tab.
+
+- Create a file named input.xcfilelist and a file named output.xcfilelist
+
+- Put the generated framework path as content for the input.xcfilelist file:
+```
+$(SRCROOT)/Carthage/Build/iOS/BokenEngine.framework
+```
+
+- Put the destination path as content for the oputput.xcfilelist file:
+```
+$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/BokenEngine.framework
+```
+
 - On the "Build Phases" setup tab, create a new Run Script Phase using the "+" button and add this line on the script block:
 ```
 /usr/local/bin/carthage copy-frameworks
 ```
-- Add the framework (**$(SRCROOT)/Carthage/Build/iOS/BokenEngine.framework**) to the "input files" control
+
+- Add the input.xcfilelist to the "Input File Lists" section of the Carthage run script phase and the output.xcfilelist to the "Output File Lists" section of the Carthage run script phase
+
 
 ### 6.3 Initializing the framework for its usage
 
