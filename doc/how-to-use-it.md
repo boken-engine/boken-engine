@@ -158,3 +158,6 @@ xcodebuild -scheme <your_scheme_name> build
 
 If you want to distribuite an iOS application used with Boken, first please make sure you follow the termns of its [license](../LICENSE.md), and then refer to the [official Apple Distribution Guidelines](https://developer.apple.com/distribute/)
 
+## Sample application
+
+A boken-based application, ["15 facts of the Universe"](https://github.com/boken-engine/15-universe-facts), can be used to fork and modify. It includes a GitHub Actions workflow that builds and generates an IPA file.
