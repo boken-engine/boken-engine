@@ -20,8 +20,3 @@ The user just have to provide a human readable JSON description with some predef
     s.platform = :ios
     s.swift_version = "4.2"
     s.ios.deployment_target  = '12.1'
-<<<<<<< HEAD
-end
-=======
-end
->>>>>>> 1d8c0b6421789e753559d4e6d48d62fe82a19b0b
