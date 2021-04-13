@@ -2,16 +2,17 @@
 ## Table of Contents
 1. [Introduction](#introduction)
 2. [Download the framework](#download-the-framework)
-3. [Linking the framework to a project](#linking-the-framework-to-a-project)
-4. [Framework basics](#framework-basics)
-5. [Relevant classes of the framework](#relevant-classes-of-the-framework)
-6. [Initializing the framework](#initializing-the-framework)
-7. [Creating the contents](#creating-the-contents)
-8. [Running tests](#running-tests)
-9. [Building the application](#building-the-application)
-10. [Distribution](#distribution)
-11. [Sample application](#sample-application)
-
+3. [Manually linking the framework to a project](#manually-linking-the-framework-to-a-project)
+4. [Link it using Carthage](#link-it-using-carthage)
+5. [Link it using CocoaPods](#link-it-using-cocoapods)
+6. [Framework basics](#framework-basics)
+7. [Relevant classes of the framework](#relevant-classes-of-the-framework)
+8. [Initializing the framework](#initializing-the-framework)
+9. [Creating the contents](#creating-the-contents)
+10. [Running tests](#running-tests)
+11. [Building the application](#building-the-application)
+12. [Distribution](#distribution)
+13. [Sample application](#sample-application)
 
 ## Introduction
 
@@ -58,6 +59,24 @@ $(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/BokenEngine.framework
 ```
 
 - Add the input.xcfilelist to the "Input File Lists" section of the Carthage run script phase and the output.xcfilelist to the "Output File Lists" section of the Carthage run script phase
+
+## Link it using CocoaPods
+
+To add BokenEngine to a project using CocoaPods, create (or modify) a podFile with this content:
+
+```ruby
+target 'MyApp' do
+   pod 'BokenEngine'
+end
+```
+
+and install it with
+
+```bash
+pod install
+```
+
+This will create (or modify) a .xcworkspace in which the framework is built and ready to be referenced by the application project. For more information, please check [the CocoaPods guide](https://guides.cocoapods.org/using/using-cocoapods.html).
 
 ## Framework basics
 
