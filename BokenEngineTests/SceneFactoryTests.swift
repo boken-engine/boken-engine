@@ -19,6 +19,7 @@ class TestableSceneFactory: SceneFactory {
             throw error
         }
     }
+
 }
 
 class SceneFactoryTests: XCTestCase {
@@ -103,4 +104,5 @@ class SceneFactoryTests: XCTestCase {
             XCTFail("Could not create sceneManager")
         }
     }
+
 }

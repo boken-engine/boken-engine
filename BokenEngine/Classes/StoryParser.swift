@@ -58,4 +58,5 @@ class StoryParser {
         let descriptionResource = isRunningTest() ? "MockedStoryDescription" : "StoryDescription"
         return try decodeJSON(resourceName: descriptionResource)
     }
+
 }

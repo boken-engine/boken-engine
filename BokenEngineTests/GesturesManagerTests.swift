@@ -51,4 +51,5 @@ class GesturesManagerTests: XCTestCase {
         gesturesManager.clearViewGestures(mockedView)
         XCTAssert(mockedView.gestureRecognizers?.count == 0)
     }
+
 }

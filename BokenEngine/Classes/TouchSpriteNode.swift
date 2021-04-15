@@ -27,4 +27,5 @@ class TouchSpriteNode: SKSpriteNode {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         clickHandler()
     }
+
 }

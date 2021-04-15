@@ -19,6 +19,7 @@ class MockSKView: SKView {
     required init(coder: NSCoder) {
         super.init(coder: coder)!
     }
+
 }
 
 class ElementFactoryTests: XCTestCase {
@@ -131,4 +132,5 @@ class ElementFactoryTests: XCTestCase {
         let imageNode = elementFactory.getImageNode(description: description!)
         XCTAssert(imageNode.hasActions())
     }
+
 }

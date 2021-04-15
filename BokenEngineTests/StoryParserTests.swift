@@ -82,4 +82,5 @@ class StoryParserTests: XCTestCase {
 
         XCTAssertEqual(thrownError as? StoryParserError, .decodingError)
     }
+
 }

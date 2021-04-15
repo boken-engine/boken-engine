@@ -18,6 +18,7 @@ class TestableSceneManager: SceneManager {
             throw error
         }
     }
+
 }
 
 class SceneManagerTests: XCTestCase {
@@ -90,4 +91,5 @@ class SceneManagerTests: XCTestCase {
         XCTAssertNoThrow(try sceneManager.loadTitleScene())
         XCTAssert(sceneManager.musicHasStarted)
     }
+
 }

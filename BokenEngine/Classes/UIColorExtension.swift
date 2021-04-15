@@ -7,6 +7,7 @@
 import UIKit
 
 extension UIColor {
+
     static func == (left: UIColor, right: UIColor) -> Bool {
         var red1: CGFloat = 0
         var green1: CGFloat = 0
@@ -20,7 +21,9 @@ extension UIColor {
         right.getRed(&red2, green: &green2, blue: &blue2, alpha: &alpha2)
         return red1 == red2 && green1 == green2 && blue1 == blue2 && alpha1 == alpha2
     }
+
 }
+
 func == (left: UIColor?, right: UIColor?) -> Bool {
     let left = left ?? .clear
     let right = right ?? .clear

@@ -41,4 +41,5 @@ class GesturesManager {
         swipeRight.direction = .right
         view.addGestureRecognizer(swipeRight)
     }
+
 }

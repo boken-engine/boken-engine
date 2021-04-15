@@ -183,4 +183,5 @@ class SceneFactory {
             throw SceneFactoryError.couldNotGetSpriteKitView
         }
     }
+
 }
