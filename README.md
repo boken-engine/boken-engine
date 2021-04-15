@@ -1,4 +1,5 @@
 # Boken Engine
+![Platform iOS](https://img.shields.io/cocoapods/p/BokenEngine) ![Licence MPL 2.0](https://img.shields.io/github/license/boken-engine/boken-engine) ![badge](https://action-badges.now.sh/boken-engine/boken-engine)
 
 An iOS Swift framework for creating slides-based, non-linear visual stories and presentations.
 
