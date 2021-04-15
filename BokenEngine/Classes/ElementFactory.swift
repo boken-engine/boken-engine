@@ -153,7 +153,13 @@ class ElementFactory {
     }
 
     func createElement(elementDescription: ElementDescription) -> SKNode! {
+        // Although in this code block we use forced type downcast,
+        // which is not advisable in general, we use the 'type' field
+        // of elementDescription to know in advance the particular description
+        // type, and therefore making the downcast possible and secure.
+
         // swiftlint:disable force_cast
+        // tailor:off
         switch elementDescription.type {
         case "textLabel":
             return getTextNode(description: elementDescription as! TextLabelDescription)
@@ -165,5 +171,7 @@ class ElementFactory {
             return nil
             }
         // swiftlint:enable force_cast
+        // tailor:on
     }
+
 }

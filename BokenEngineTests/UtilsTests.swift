@@ -36,4 +36,5 @@ class UtilsTests: XCTestCase {
     func testDetectorFunction() {
         XCTAssertTrue(isRunningTest())
     }
+
 }

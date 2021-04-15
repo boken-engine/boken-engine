@@ -32,4 +32,5 @@ class AudioManagerTests: XCTestCase {
     func testSoundLoad() {
         XCTAssertNoThrow(try audioManager.playSoundFX(resourceName: "soundTest"))
     }
+
 }
