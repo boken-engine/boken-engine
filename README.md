@@ -1,4 +1,5 @@
 # Boken Engine
+![Platform iOS](https://img.shields.io/cocoapods/p/BokenEngine) ![Licence MPL 2.0](https://img.shields.io/github/license/boken-engine/boken-engine) ![badge](https://action-badges.now.sh/boken-engine/boken-engine)
 
 An iOS Swift framework for creating slides-based, non-linear visual stories and presentations.
 
@@ -90,6 +91,23 @@ $(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/BokenEngine.framework
 
 - Add the input.xcfilelist to the "Input File Lists" section of the Carthage run script phase and the output.xcfilelist to the "Output File Lists" section of the Carthage run script phase
 
+#### Using CocoaPods
+
+To add BokenEngine to a project using CocoaPods, create (or modify) a podFile with this content:
+
+```ruby
+target 'MyApp' do
+   pod 'BokenEngine'
+end
+```
+
+and install it with
+
+```bash
+pod install
+```
+
+This will create (or modify) a .xcworkspace in which the framework is built and ready to be referenced by the application project. For more information, please check [the CocoaPods guide](https://guides.cocoapods.org/using/using-cocoapods.html).
 
 ### 6.3 Initializing the framework for its usage
 
