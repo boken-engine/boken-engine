@@ -71,5 +71,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: GitHub Action for SwiftLint
+      - name: Lint check using SwiftLint
         uses: norio-nomura/action-swiftlint@3.2.1
+  Tailor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Tailor
+          brew update
+          brew install tailor      
+      - name: Static analysis using Tailor
+        uses: actions/checkout@v1
+          tailor .
+        
