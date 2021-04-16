@@ -11,12 +11,6 @@ import SpriteKit
 
 class UtilsTests: XCTestCase {
 
-    override func setUp() {
-    }
-
-    override func tearDown() {
-    }
-
     func testGetUIColor() {
         XCTAssert(getUIColor(colorName: ColorName.black) == UIColor.black)
         XCTAssert(getUIColor(colorName: ColorName.red) == UIColor.red)

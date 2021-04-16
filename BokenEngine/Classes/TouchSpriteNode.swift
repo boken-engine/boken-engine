@@ -9,6 +9,7 @@ import GameplayKit
 // From https://developer.apple.com/documentation/spritekit/sknode/controlling_user_interaction_on_nodes
 class TouchSpriteNode: SKSpriteNode {
 
+    /* Default click handler, does nothing */
     var clickHandler: () -> Void = { () in }
 
     override var isUserInteractionEnabled: Bool {
