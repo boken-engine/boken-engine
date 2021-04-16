@@ -24,12 +24,6 @@ class TestableSceneFactory: SceneFactory {
 
 class SceneFactoryTests: XCTestCase {
 
-    override func setUp() {
-    }
-
-    override func tearDown() {
-    }
-
     func testFirstLoadScene() {
 
         let firstContent = """
@@ -55,7 +49,7 @@ class SceneFactoryTests: XCTestCase {
             XCTAssertNil(scene?.childNode(withName: "button: Back"))
             XCTAssert(!sceneFactory.soundHasStarted)
         } catch {
-            XCTFail("Could not create sceneManager")
+            XCTFail("An error occurred in testFirstLoadScene")
         }
     }
 
@@ -84,7 +78,7 @@ class SceneFactoryTests: XCTestCase {
             XCTAssertNotNil(scene?.childNode(withName: "button: Back"))
             XCTAssert(sceneFactory.soundHasStarted)
         } catch {
-            XCTFail("Could not create sceneManager")
+            XCTFail("An error occurred in testSecondLoadScene")
         }
     }
 
@@ -101,7 +95,7 @@ class SceneFactoryTests: XCTestCase {
             sceneFactory.createNavigationGestures(navigationOptions: NavigationOptions.both, view: view)
             XCTAssert(view.gestureRecognizers?.count == 2)
         } catch {
-            XCTFail("Could not create sceneManager")
+            XCTFail("An error occurred in testGesturesNavigation")
         }
     }
 
