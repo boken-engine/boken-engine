@@ -44,3 +44,4 @@ A new version should be released when:
 - http://oss-watch.ac.uk/resources/releasemanagement
 - https://en.wikipedia.org/wiki/Software_versioning
 - https://en.wikipedia.org/wiki/Software_release_life_cycle
+- https://semver.org/
