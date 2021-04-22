@@ -84,3 +84,12 @@ jobs:
         uses: actions/checkout@v2          
       - name: Static analysis using Tailor
         run: tailor .
+  Lizard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Lizard
+        run: pip install lizard      
+      - name: Checkout
+        uses: actions/checkout@v2          
+      - name: Code quality using Lizard
+        run: lizard
