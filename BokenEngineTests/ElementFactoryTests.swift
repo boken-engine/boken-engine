@@ -64,6 +64,23 @@ class ElementFactoryTests: XCTestCase {
         XCTAssert(imageNode.position.y == 2000)
     }
 
+    func testAutoScaledImageCreation() {
+        let nodeString = """
+                        {
+                            "type": "image",
+                            "imageFile": "saturn",
+                            "posX": 10,
+                            "posY": 20,
+                            "scale": 0,
+                            "scaleH": 0,
+                        }
+                        """
+        let description = try? JSONDecoder().decode(ImageDescription.self, from: nodeString.data(using: .utf8)!)
+        let imageNode = elementFactory.getImageNode(description: description!)
+        XCTAssertNotNil(imageNode)
+        XCTAssert(imageNode.xScale == 0.0078125)
+    }
+
     func testShapeCreation() {
         let nodeString = """
                             {
