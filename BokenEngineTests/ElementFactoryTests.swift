@@ -26,12 +26,6 @@ class ElementFactoryTests: XCTestCase {
 
     let elementFactory = ElementFactory(view: MockSKView(), scene: SKScene())
 
-    override func setUp() {
-    }
-
-    override func tearDown() {
-    }
-
     func testNodeLabelCreation() {
         let nodeString = """
                         {

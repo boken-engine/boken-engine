@@ -26,12 +26,6 @@ class GesturesManagerTests: XCTestCase {
                     }, "navigation": "back"}]}
         """
 
-    override func setUp() {
-    }
-
-    override func tearDown() {
-    }
-
     func testInstallSwipeGesturesRecognizers() {
         let mockedView = MockSKView()
         let gesturesManager = GesturesManager()
