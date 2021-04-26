@@ -25,9 +25,6 @@ class StoryParserTests: XCTestCase {
         storyParser = StoryParser()
     }
 
-    override func tearDown() {
-    }
-
     func testSucessfulContentsParse() {
         do {
             let appDescription = try storyParser?.decodeJSON(contents: goodContents)!

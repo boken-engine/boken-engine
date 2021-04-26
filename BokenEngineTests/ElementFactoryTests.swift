@@ -26,12 +26,6 @@ class ElementFactoryTests: XCTestCase {
 
     let elementFactory = ElementFactory(view: MockSKView(), scene: SKScene())
 
-    override func setUp() {
-    }
-
-    override func tearDown() {
-    }
-
     func testNodeLabelCreation() {
         let nodeString = """
                         {
@@ -68,6 +62,23 @@ class ElementFactoryTests: XCTestCase {
         XCTAssertNotNil(imageNode)
         XCTAssert(imageNode.position.x == 1000)
         XCTAssert(imageNode.position.y == 2000)
+    }
+
+    func testAutoScaledImageCreation() {
+        let nodeString = """
+                        {
+                            "type": "image",
+                            "imageFile": "saturn",
+                            "posX": 10,
+                            "posY": 20,
+                            "scale": 0,
+                            "scaleH": 0,
+                        }
+                        """
+        let description = try? JSONDecoder().decode(ImageDescription.self, from: nodeString.data(using: .utf8)!)
+        let imageNode = elementFactory.getImageNode(description: description!)
+        XCTAssertNotNil(imageNode)
+        XCTAssert(imageNode.xScale == 0.0078125)
     }
 
     func testShapeCreation() {

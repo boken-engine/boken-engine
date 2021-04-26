@@ -163,17 +163,17 @@ struct Elements: Decodable {
         let container = try decoder.container(keyedBy: ElementsKey.self)
         var elementsArrayForType = try container.nestedUnkeyedContainer(forKey: ElementsKey.elementsArray)
         var elements = [ElementDescription]()
-        var elementsArray = elementsArrayForType
+        var originalElementsArray = elementsArrayForType
         while !elementsArrayForType.isAtEnd {
             let element = try elementsArrayForType.nestedContainer(keyedBy: ElementsTypeKey.self)
             let type = try element.decode(ElementTypes.self, forKey: ElementsTypeKey.type)
             switch type {
             case .textLabel:
-                elements.append(try elementsArray.decode(TextLabelDescription.self))
+                elements.append(try originalElementsArray.decode(TextLabelDescription.self))
             case .image:
-                elements.append(try elementsArray.decode(ImageDescription.self))
+                elements.append(try originalElementsArray.decode(ImageDescription.self))
             case .shape:
-                elements.append(try elementsArray.decode(ShapeDescription.self))
+                elements.append(try originalElementsArray.decode(ShapeDescription.self))
             }
         }
         self.elementsArray = elements

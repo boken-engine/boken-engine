@@ -11,12 +11,6 @@ class AudioManagerTests: XCTestCase {
 
     let audioManager = AudioManager()
 
-    override func setUp() {
-    }
-
-    override func tearDown() {
-    }
-
     func testFailingBackgroundMusicLoad() {
         XCTAssertThrowsError(try audioManager.playBackgroundMusic(resourceName: "inexistent-audio"))
     }

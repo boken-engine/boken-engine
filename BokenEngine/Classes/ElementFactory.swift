@@ -87,8 +87,8 @@ class ElementFactory {
     }
 
     func getFinalElementScale(scale: Float, scaleH: Float?, useOnlyYAxis: Bool) -> CGFloat {
-        let size = (isLandscapeMode() && scaleH != nil) ? scaleH! : scale
-        return CGFloat(size) * (useOnlyYAxis ? scaleFactor.y : self.maxScaleFactor)
+        let applicableScale = (isLandscapeMode() && scaleH != nil) ? scaleH! : scale
+        return CGFloat(applicableScale) * (useOnlyYAxis ? scaleFactor.y : self.maxScaleFactor)
     }
 
     func getFinalShapeDimensions(description: ShapeDescription, useOnlyYAxis: Bool) -> CGPoint {
@@ -110,9 +110,30 @@ class ElementFactory {
         return label
     }
 
+    func setCoverScaleToImage(_ image: SKSpriteNode) {
+        let imageAspect = image.size.width / image.size.height
+        let deviceAspect = self.scene.size.width / self.scene.size.height
+        if imageAspect > deviceAspect {
+            image.setScale(self.scene.size.height / image.size.height)
+        } else {
+            image.setScale(self.scene.size.width / image.size.width)
+        }
+    }
+
+    func applyImageScale(image: SKSpriteNode, description: ImageDescription) {
+        let scale = getFinalElementScale(scale: description.scale,
+                                         scaleH: description.scaleH,
+                                         useOnlyYAxis: false)
+        if scale == 0 {
+            setCoverScaleToImage(image)
+        } else {
+            image.setScale(scale)
+        }
+    }
+
     func getImageNode(description: ImageDescription) -> SKSpriteNode {
         let image = SKSpriteNode(imageNamed: description.imageFile)
-        image.setScale(getFinalElementScale(scale: description.scale, scaleH: description.scaleH, useOnlyYAxis: false))
+        applyImageScale(image: image, description: description)
         image.position = getFinalElementPosition(description: description)
         image.accessibilityLabel = "image: "+description.imageFile
         image.name = image.accessibilityLabel
