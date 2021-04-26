@@ -38,7 +38,8 @@ class ElementFactory {
             for transformation in transformations {
                 switch transformation.type {
                 case TransformationType.scale:
-                    element.run(SKAction.scale(to: CGFloat(getTransformationFinalValue(transformation)) * self.maxScaleFactor,
+                    let finalValue = CGFloat(getTransformationFinalValue(transformation))
+                    element.run(SKAction.scale(to: finalValue * self.maxScaleFactor,
                                                duration: TimeInterval(transformation.duration)))
                 case TransformationType.rotation:
                     element.run(SKAction.rotate(toAngle: CGFloat(getTransformationFinalValue(transformation)    ),
