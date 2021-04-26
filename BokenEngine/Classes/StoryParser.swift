@@ -40,6 +40,9 @@ class StoryParser {
         let jsonData = contents.data(using: .utf8)!
         do {
             return try JSONDecoder().decode(AppDescription.self, from: jsonData)
+        } catch DecodingError.dataCorrupted(let context) {
+            print(context.underlyingError ?? "Data corrupted error")
+            throw StoryParserError.decodingError
         } catch {
             throw StoryParserError.decodingError
         }
