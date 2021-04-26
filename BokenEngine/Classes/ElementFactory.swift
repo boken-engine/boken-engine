@@ -20,17 +20,32 @@ class ElementFactory {
         self.maxScaleFactor = max(self.scaleFactor.x, self.scaleFactor.y)
     }
 
+    func getTransformationDestinationPoint(_ description: TransformationDescription) -> CGPoint {
+        return isLandscapeMode()  ? getDeviceRelativeCoordinates(view: self.view,
+                                                                 posX: description.toPosXH!,
+                                                                 posY: description.toPosYH!) :
+                                    getDeviceRelativeCoordinates(view: self.view,
+                                                                 posX: description.toPosX!,
+                                                                 posY: description.toPosY!)
+    }
+
+    func getTransformationFinalValue(_ description: TransformationDescription) -> Float {
+        return (isLandscapeMode() && description.toValueH != nil) ? description.toValueH! : description.toValue!
+    }
+
     func applyTransformationsToElement(_ transformations: [TransformationDescription]?, _ element: SKNode) {
         if let transformations = transformations {
             for transformation in transformations {
-                let finalValue = getTransformationFinalValue(description: transformation)
                 switch transformation.type {
                 case TransformationType.scale:
-                    element.run(SKAction.scale(to: CGFloat(finalValue) * self.maxScaleFactor,
+                    element.run(SKAction.scale(to: CGFloat(getTransformationFinalValue(transformation)) * self.maxScaleFactor,
                                                duration: TimeInterval(transformation.duration)))
                 case TransformationType.rotation:
-                    element.run(SKAction.rotate(toAngle: CGFloat(finalValue),
+                    element.run(SKAction.rotate(toAngle: CGFloat(getTransformationFinalValue(transformation)    ),
                                                 duration: TimeInterval(transformation.duration)))
+                case TransformationType.swipe:
+                    element.run(SKAction.move(to: getTransformationDestinationPoint(transformation),
+                                              duration: TimeInterval(transformation.duration)))
                 }
             }
         }
@@ -61,10 +76,6 @@ class ElementFactory {
             label.fontColor = color
         }
         return label
-    }
-
-    func getTransformationFinalValue(description: TransformationDescription) -> Float {
-        return (isLandscapeMode() && description.toValueH != nil) ? description.toValueH! : description.toValue
     }
 
     func getFinalElementPosition(description: ElementDescription) -> CGPoint {
