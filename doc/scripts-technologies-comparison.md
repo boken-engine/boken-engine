@@ -18,7 +18,7 @@ Compared with Boken, it is a more appropiate tool for creating text-only, narrat
 [Z-Machine](http://www.inform-fiction.org/zmachine/standards/z1point0/index.html) is a virtual machine format created by the game company Infocom. The games are distributed using binary files (sometimes called [Z-Code or Z5 files](http://fileformats.archiveteam.org/wiki/Z-code))
 There are several tools for creating Z-Machine content, like [Inform](http://inform7.com/), but in general, is a process very much tougher than using other scripts languages.
 
-It is similar to Boken in the scope and features, but is more challenging to a non developer user. 
+It is more or less similar to Boken in the scope and features, but is challenging to a non developer user. 
 
 ## Twine
 
@@ -29,5 +29,6 @@ Although lacks some of the features of Boken Engine (like media support), its vi
 
 ## Ren'Py
 
-[Ren'Py](https://www.renpy.org/) is a cross-platform visual novel engine tool very popular among the "japanese style" visual novel community.
+[Ren'Py](https://www.renpy.org/) is a cross-platform visual novel engine tool very popular among the community. In is completely targeted to a very specific kind of application ("japanese style" visual novel with backgrounds, characters and conversations), but is very easy to learn the script language and create a distributable Visual Novel.
 
+Probably is the one more close to BOken Engine in terms of workflow and features, is more easy to use but limited in the range of applications that can be created.
