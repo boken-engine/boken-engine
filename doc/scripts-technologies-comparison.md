@@ -31,4 +31,4 @@ Although lacks some of the features of Boken Engine (like media support), its vi
 
 [Ren'Py](https://www.renpy.org/) is a cross-platform visual novel engine tool very popular among the community. It is completely targeted to a very specific kind of application ("Japanese style" visual novel with backgrounds, characters, and conversations), but is very easy to learn the script language and create a distributable Visual Novel.
 
-Probably is the one more close to BOoen Engine in terms of workflow and features, is easier to use but limited in the range of applications that can be created.
+Probably is the one more close to Boken Engine in terms of workflow and features, is easier to use but limited in the range of applications that can be created.
