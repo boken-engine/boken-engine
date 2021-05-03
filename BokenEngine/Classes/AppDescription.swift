@@ -21,7 +21,9 @@ enum NavigationOptions: String, Decodable {
 
 struct Branch: Decodable {
     let label: String
-    let target: String
+    let target: String?
+    let callbackClass: String?
+    let callbackMethod: String?
 }
 
 enum TransformationType: String, Decodable {

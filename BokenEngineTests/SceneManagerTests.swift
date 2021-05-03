@@ -70,6 +70,19 @@ class SceneManagerTests: XCTestCase {
         XCTAssert(sceneManager.getCurrentScene() == 2)
     }
 
+    func testGoToScene() {
+        do {
+            try sceneManager.goToScene(sceneId: "two")
+            XCTAssert(sceneManager.getCurrentScene() == 1)
+        } catch {
+            XCTFail("testGoToScene at SceneManagerTests failed")
+        }
+    }
+
+    func testFailingGoToScene() {
+        XCTAssertThrowsError(try sceneManager.goToScene(sceneId: "inexistentScene"))
+    }
+
     func testNextScene() {
         sceneManager.setCurrentScene(1)
         XCTAssertNoThrow(try sceneManager.goToNextScene())
@@ -92,4 +105,16 @@ class SceneManagerTests: XCTestCase {
         XCTAssert(sceneManager.musicHasStarted)
     }
 
+    func testCustomButtonCallBack() {
+        do {
+            try sceneManager.setCallbackToButton(callBack: {},
+                                                 buttonSignature: "Title.Testme")
+            XCTAssertThrowsError(try sceneManager.setCallbackToButton(callBack: {},
+                                                                      buttonSignature: "Title.Testme"))
+            XCTAssertTrue(sceneManager.unsetButtonCallback(buttonSignature: "Title.Testme"))
+            XCTAssertFalse(sceneManager.unsetButtonCallback(buttonSignature: "Title.Testme"))
+        } catch {
+            XCTFail("testCustomButtonCallBack at SceneManagerTests failed")
+        }
+    }
 }
