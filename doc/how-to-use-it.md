@@ -9,10 +9,11 @@
 7. [Relevant classes of the framework](#relevant-classes-of-the-framework)
 8. [Initializing the framework](#initializing-the-framework)
 9. [Creating the contents](#creating-the-contents)
-10. [Running tests](#running-tests)
-11. [Building the application](#building-the-application)
-12. [Distribution](#distribution)
-13. [Sample application](#sample-application)
+10. [Linking custom functions to buttons](#linking-custom-functions-to-buttons)
+11. [Running tests](#running-tests)
+12. [Building the application](#building-the-application)
+13. [Distribution](#distribution)
+14. [Sample application](#sample-application)
 
 ## Introduction
 
@@ -161,6 +162,22 @@ In order to accomplish this, the Main View instance must have SKView class. To d
 ## Creating the contents
 
 Check the [Content creation guide](contents-creation-guide.md) to know how to put the actual content of your application to be rendered by the engine.
+
+## Linking custom functions to buttons
+
+Although the typical use for branch buttons is to navigate to a specific scene, the application can define custom code to be executed when the user clicks on a branch button.
+
+To do so, a function without parameters and no return type must be defined, and it must be passed to the framework by calling sceneManager.setCallbackToButton. The link is set using the _button signature_, a String wich is composed by the SceneId of the scene where the button is defined and the button label, joined by a dot.
+
+This is an example of a function that will be called when a user clicks on a button labelled "Continue":
+
+```swift
+func testMethod() { print("Hello world!") }
+try sceneManager.setCallbackToButton(callBack: testMethod, buttonSignature: "SecondScene.Continue")
+```
+
+In this example, the "Continue" button is defined in a Scene with SceneId "SecondScene". If the branch button in the content description JSON also has a target scene specified, this scene will be loaded _after_ the callback function is called.
+
 
 ## Running tests
 
