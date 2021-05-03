@@ -107,12 +107,16 @@ class SceneManagerTests: XCTestCase {
 
     func testCustomButtonCallBack() {
         do {
-            try sceneManager.setCallbackToButton(callBack: {},
-                                                 buttonSignature: "Title.Testme")
-            XCTAssertThrowsError(try sceneManager.setCallbackToButton(callBack: {},
-                                                                      buttonSignature: "Title.Testme"))
-            XCTAssertTrue(sceneManager.unsetButtonCallback(buttonSignature: "Title.Testme"))
-            XCTAssertFalse(sceneManager.unsetButtonCallback(buttonSignature: "Title.Testme"))
+            let buttonSignature = "Title.Testme"
+            let buttonCallback = {
+                // Implementation intentionally left empty
+            }
+            try sceneManager.setCallbackToButton(callBack: buttonCallback,
+                                                 buttonSignature: buttonSignature)
+            XCTAssertThrowsError(try sceneManager.setCallbackToButton(callBack: buttonCallback,
+                                                                      buttonSignature: buttonSignature))
+            XCTAssertTrue(sceneManager.unsetButtonCallback(buttonSignature: buttonSignature))
+            XCTAssertFalse(sceneManager.unsetButtonCallback(buttonSignature: buttonSignature))
         } catch {
             XCTFail("testCustomButtonCallBack at SceneManagerTests failed")
         }

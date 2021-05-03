@@ -135,7 +135,7 @@ class SceneFactory {
             do {
                 try self.sceneManager.goToScene(sceneId: target)
             } catch {
-                print("Could not go to scene "+target+". Addtional inf  ormation: "+error.localizedDescription)
+                print("Could not go to scene "+target+". Addtional information: "+error.localizedDescription)
             }
         }
     }
