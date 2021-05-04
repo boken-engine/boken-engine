@@ -8,6 +8,12 @@ import GameplayKit
 
 enum SceneFactoryError: Error {
     case couldNotGetSpriteKitView
+    case callbackAlreadySet
+}
+
+struct ButtonCallback {
+    let buttonSignature: String
+    let callBackFunc: () -> Void
 }
 
 class SceneFactory {
@@ -17,6 +23,7 @@ class SceneFactory {
     let audioManager: AudioManager
     let gesturesManager: GesturesManager
     var elementFactory: ElementFactory!
+    var buttonsCallbacks: [ButtonCallback] = []
 
     init(rootView: UIView, sceneManager: SceneManager) {
         self.rootView = rootView
@@ -29,6 +36,7 @@ class SceneFactory {
         let view = rootView as? SKView
         view!.accessibilityLabel = "scene: "+sceneDescription.sceneId
         scene.scaleMode = .aspectFill
+        scene.name = sceneDescription.sceneId
         if sceneDescription.background == "black" {
             scene.backgroundColor = UIColor.black
         } else {
@@ -95,16 +103,50 @@ class SceneFactory {
         scene.addChild(nextButton)
     }
 
+    func unsetButtonCallback(buttonSignature: String) -> Bool {
+        if let index = buttonsCallbacks.firstIndex(where: { $0.buttonSignature == buttonSignature }) {
+            buttonsCallbacks.remove(at: index)
+            return true
+        } else {
+            return false
+        }
+    }
+
+    func setCallbackToButton(callBack: @escaping () -> Void, buttonSignature: String ) throws {
+        if(buttonsCallbacks.contains(where: { $0.buttonSignature == buttonSignature })) {
+            throw SceneFactoryError.callbackAlreadySet
+        }
+        let buttonCallback = ButtonCallback(
+            buttonSignature: buttonSignature,
+            callBackFunc: callBack
+        )
+        buttonsCallbacks.append(buttonCallback)
+    }
+
+    func executeCallBackIfExists(sceneName: String, branchLabel: String) {
+        let buttonSignature = sceneName+"."+branchLabel
+        if let callBack = self.buttonsCallbacks.first(where: { $0.buttonSignature == buttonSignature }) {
+            callBack.callBackFunc()
+        }
+    }
+
+    func goToBranchSceneIfDefined(_ branch: Branch) {
+        if let target = branch.target {
+            do {
+                try self.sceneManager.goToScene(sceneId: target)
+            } catch {
+                print("Could not go to scene "+target+". Addtional information: "+error.localizedDescription)
+            }
+        }
+    }
+
     func addBranchButtonToScene(_ scene: SKScene, branch: Branch, offsetY: Int) {
         let buttonWidth = isLandscapeMode() ? Int(scene.size.width * 0.3) : Int(scene.size.width * 0.9)
         let branchButton = elementFactory.getButtonNode(width: buttonWidth, labelContent: branch.label)
         branchButton.position = CGPoint(x: scene.size.width / 2, y: CGFloat(offsetY))
         branchButton.onClick {
-            do {
-                try self.sceneManager.goToScene(sceneId: branch.target)
-            } catch {
-                print("Could not go to scene "+branch.target+". Addtional information: "+error.localizedDescription)
-            }
+            self.executeCallBackIfExists(sceneName: scene.name!, branchLabel: branch.label)
+            self.goToBranchSceneIfDefined(branch)
         }
         scene.addChild(branchButton)
     }

@@ -6,6 +6,10 @@
 
 import GameplayKit
 
+enum SceneManagerError: Error {
+    case sceneNotFound
+}
+
 public class SceneManager {
 
     var currentScene: Int!
@@ -42,8 +46,12 @@ public class SceneManager {
         currentScene = newSceneNumber
     }
 
-    public func setCurrentScene(_ newSceneId: String) {
-        currentScene = appDescription.scenes.firstIndex(where: { $0.sceneId == newSceneId })!
+    public func setCurrentScene(_ newSceneId: String) throws {
+        if let newSceneIndex = appDescription.scenes.firstIndex(where: { $0.sceneId == newSceneId }) {
+            currentScene = newSceneIndex
+        } else {
+            throw SceneManagerError.sceneNotFound
+        }
     }
 
     public func getCurrentScene() -> Int {
@@ -117,12 +125,20 @@ public class SceneManager {
     }
 
     public func goToScene(sceneId: String) throws {
-        setCurrentScene(sceneId)
         do {
+            try setCurrentScene(sceneId)
             try loadCurrentScene()
         } catch {
             throw error
         }
+    }
+
+    public func setCallbackToButton(callBack: @escaping () -> Void, buttonSignature: String ) throws {
+        try sceneFactory.setCallbackToButton(callBack: callBack, buttonSignature: buttonSignature)
+    }
+
+    public func unsetButtonCallback(buttonSignature: String ) -> Bool {
+        return sceneFactory.unsetButtonCallback(buttonSignature: buttonSignature)
     }
 
 }
