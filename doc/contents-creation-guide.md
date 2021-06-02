@@ -7,10 +7,11 @@
 2. [Some concepts](#section-concepts)
 3. [Horizontal layout properties](#section-horizontal)
 4. [Content definition file structure](#section-structure)
-5. [Assets catalogues](#section-catalogues)
-6. [Content definition file example](#section-example) 
-7. [Appendix A: Basic data types](#section-appa) 
-8. [Appendix B: JSON editors](#section-appb) 
+5. [Elements position and rendering precedence](#elements-position)
+6. [Assets catalogues](#section-catalogues)
+7. [Content definition file example](#section-example) 
+8. [Appendix A: Basic data types](#section-appa) 
+9. [Appendix B: JSON editors](#section-appb) 
 
 <a name="section-intro"></a>
 ## 1. How do I create content using Boken Engine?
@@ -79,6 +80,7 @@ The content description file must contain a valid "application definition" objec
         "elementsArray": [subclass-of-ElementDescription]
     }
 ```
+_Note_: Position of the elements in the array matters. Please check [next section](elements-position) to know more.
 ### ElementDescription 
 ```
     {
@@ -129,8 +131,13 @@ The content description file must contain a valid "application definition" objec
     }
 ```
 
+<a name="elements-position"></a>
+## 5. Elements position and rendering precedence
+
+In the previous section we defined the collection of elements to be rendered as an array.  Facing how the order in which the elements are going to be rendered (and thus, how they will overlap each other) we decided for simply corelate the position in the array with the render order (so the first elements in the array will be the first rendered, and could be overlaped by the other) and neglected introducing an explicit order property, to achieve simplicity in the elements collection changes and having a direct corelation between array order and render order, accepting implicit domain implications and semantics in the structure.
+
 <a name="section-catalogues"></a>
-## 5. Assets catalogues
+## 6. Assets catalogues
 
 There are three properties in the JSON file that refers to external files within the project structure:
 
@@ -141,7 +148,7 @@ There are three properties in the JSON file that refers to external files within
 Those are references to assets that must be present inside the project as part of Assets Catalogues (.xcassets folders). To know how to create them, please refer to [this post](https://www.hackingwithswift.com/example-code/xcode/how-to-load-assets-from-xcode-asset-catalogs) at [Hacking with Swift](https://www.hackingwithswift.com).
 
 <a name="section-example"></a>
-## 6. Content description file example
+## 7. Content description file example
 
 ```JSON
 {
