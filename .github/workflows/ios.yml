@@ -78,9 +78,9 @@ jobs:
     steps:
       - name: Install Tailor
         run: |          
-          brew update
-          brew install openjdk
-          brew install tailor      
+          wget https://github.com/sleekbyte/tailor/releases/download/v0.1.0/tailor.tar -O /tmp/tailor.tar
+          tar -xvf /tmp/tailor.tar
+          export PATH=$PATH:$PWD/tailor/bin/     
       - name: Checkout
         uses: actions/checkout@v2          
       - name: Static analysis using Tailor
