@@ -77,9 +77,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install Tailor
-        run: |
-          brew install --build-from-source openjdk
+        run: |          
           brew update
+          brew install openjdk
           brew install tailor      
       - name: Checkout
         uses: actions/checkout@v2          
