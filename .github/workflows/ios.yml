@@ -78,6 +78,7 @@ jobs:
     steps:
       - name: Install Tailor
         run: |
+          brew install --build-from-source openjdk
           brew update
           brew install tailor      
       - name: Checkout
