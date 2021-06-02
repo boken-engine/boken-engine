@@ -74,13 +74,12 @@ jobs:
       - name: GitHub Action for SwiftLint
         uses: norio-nomura/action-swiftlint@3.2.1
   Tailor:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - name: Install Tailor
         run: |          
-          wget https://github.com/sleekbyte/tailor/releases/download/v0.1.0/tailor.tar -O /tmp/tailor.tar
-          tar -xvf /tmp/tailor.tar
-          export PATH=$PATH:$PWD/tailor/bin/     
+          brew update
+          brew install tailor   
       - name: Checkout
         uses: actions/checkout@v2          
       - name: Static analysis using Tailor
