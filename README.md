@@ -45,7 +45,7 @@ Boken Engine is not a stand-alone application. This is a Framework: a piece of s
 
 ![Create your project using XCode](./doc/images/how-to-use-01-create-new-ios-app-project.png)
 
-2. Choose options for your new project. Set a Project Name, Organization Identifier and be sure you select "Storyboard" option for Interface, "UIKiy App Delegate" option for Life Cycle and "Swift" option for Language.
+2. Choose options for your new project. Set a Project Name, Organization Identifier and be sure you select "Storyboard" option for Interface, "UIKit App Delegate" option for Life Cycle and "Swift" option for Language.
 
 ![Choose options for your new project](./doc/images/how-to-use-02-create-new-ios-app-project-setup.png)
 
