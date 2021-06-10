@@ -39,108 +39,134 @@ Boken Engine only uses built-in iOS libraries: UIKit, SceneKit and SpriteKit. No
 
 Boken Engine is not a stand-alone application. This is a Framework: a piece of software intended to be used within another Application that will make use of its features. Currently, only supports iOS (iPhone + iPad) applications.
 
-### 6.1 Basic usage
+### 6.1. Basic usage
 
-  1. Create your project using XCode
-  2. Link the framework with your project (see "6.2 How to link the framework with a new project")
-  3. Initialize the framework (see "6.3 Initializing the framework for its usage")
-  4. Create the contents file and put it along with the image/audio assets into the project (see "6.4 Content creation")
-  5. (optional) Add any additional feature to your application
-  6. Publish your application 
+1. Create your project using XCode. Select iOS App template.
 
-### 6.2 Linking the framework in a new project
+![Create your project using XCode](./doc/images/how-to-use-01-create-new-ios-app-project.png)
 
-#### Manually
+2. Choose options for your new project. Set a Project Name, Organization Identifier and be sure you select "Storyboard" option for Interface, "UIKiy App Delegate" option for Life Cycle and "Swift" option for Language.
 
-- Download the library from its [source repository](https://github.com/boken-engine/boken-engine). Save it in any folder of your hard drive.
-- Create or open the project you want to use the framwework with
-- In this project, drag and drop the framework project file (BokenEngine.xcodeproj) to anywhere within the Project Navigator tree
-- Add the library to the "Link Binary with Libraries" section of the target's Build Phases tab, using the "+" icon
+![Choose options for your new project](./doc/images/how-to-use-02-create-new-ios-app-project-setup.png)
 
-#### Using Carthage
+3. Now you can see basic structure for your new created project on Project Navigator tree.
 
-Follow the official [Carthage procedure for building platform-specific framework bundles](https://github.com/Carthage/Carthage#if-youre-building-for-ios-tvos-or-watchos):
+![Choose options for your new project](./doc/images/how-to-use-03-project-navigator-tree.png)
 
-- Add this line to your Cartfile (or create it with this content):
-```
-github "boken-engine/boken-engine" "master"
-```
-- Build the Carthage managed dependencies:
-```
-carthage update --platform iOS
-```
+4. Link the framework with your project. You can do it manually or using Carthage/CocoaPods if you prefer.
 
-- Add the generated Carthage/Build/iOS/BokenEngine.framework file to the "Linked Frameworks and Libraries" of your project "General" setup tab.
+    *Manually*
 
-- Create a file named input.xcfilelist and a file named output.xcfilelist
+    - Download Boken from its [source repository](https://github.com/boken-engine/boken-engine). Save it in any folder of your hard drive.
+    - On the project you want to link Boken, drag and drop the framework project file (BokenEngine.xcodeproj) to anywhere within the Project Navigator tree.
 
-- Put the generated framework path as content for the input.xcfilelist file:
-```
-$(SRCROOT)/Carthage/Build/iOS/BokenEngine.framework
-```
+        ![Drag framework project file to your project](./doc/images/how-to-use-04-drag-framework-project-file.png)
 
-- Put the destination path as content for the oputput.xcfilelist file:
-```
-$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/BokenEngine.framework
-```
+    - Add the library to the "Link Binary with Libraries" section of the target's Build Phases tab, using the "+" icon
 
-- On the "Build Phases" setup tab, create a new Run Script Phase using the "+" button and add this line on the script block:
-```
-/usr/local/bin/carthage copy-frameworks
-```
+        ![Link Binary with Libraries](./doc/images/how-to-use-05-add-the-library-to-link-binary-with-libraries.png)
 
-- Add the input.xcfilelist to the "Input File Lists" section of the Carthage run script phase and the output.xcfilelist to the "Output File Lists" section of the Carthage run script phase
+    - On the pop up screen you should see BokenEngine.framework available to be added. Just click on the "Add" button to link it to your project.
 
-#### Using CocoaPods
+        ![Add framework](./doc/images/how-to-use-06-choose-the-framework-to-add.png)
 
-To add BokenEngine to a project using CocoaPods, create (or modify) a podFile with this content:
+    *Using [Carthage](https://github.com/Carthage/Carthage)*
 
-```ruby
-target 'MyApp' do
-   pod 'BokenEngine'
-end
-```
+    Follow the official [Carthage procedure for building platform-specific framework bundles](https://github.com/Carthage/Carthage#if-youre-building-for-ios-tvos-or-watchos):
 
-and install it with
+    - Add this line to your Cartfile (or create it with this content):
+        ```
+        github "boken-engine/boken-engine" "master"
+        ```
 
-```bash
-pod install
-```
+    - Build the Carthage managed dependencies:
+        ```
+        carthage update --platform iOS
+        ```
 
-This will create (or modify) a .xcworkspace in which the framework is built and ready to be referenced by the application project. For more information, please check [the CocoaPods guide](https://guides.cocoapods.org/using/using-cocoapods.html).
+    - Add the generated Carthage/Build/iOS/BokenEngine.framework file to the "Linked Frameworks and Libraries" of your project "General" setup tab.
 
-### 6.3 Initializing the framework for its usage
+    - Create a file named input.xcfilelist and a file named output.xcfilelist
 
-The main class of the Engine is the SceneManager. To use the engine, just instantiate it, pass your application root view to it, and call the Title Scene loader.
-Typically, this is done in the viewDidLoad method of the ViewController class (ViewController.swift file) this way:
+    - Put the generated framework path as content for the input.xcfilelist file:
+        ```
+        $(SRCROOT)/Carthage/Build/iOS/BokenEngine.framework
+        ```
 
-```swift
-import BokenEngine
+    - Put the destination path as content for the oputput.xcfilelist file:
+        ```
+        $(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/BokenEngine.framework
+        ```
 
-class ViewController: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-		
-		// Boken Engine initialization
-        let sceneManager = try! SceneManager()
-        sceneManager.setRootView(self.view)
-        try! sceneManager.loadTitleScene()
-    }
-}
-```
+    - On the "Build Phases" setup tab, create a new Run Script Phase using the "+" button and add this line on the script block:
+        ```
+        /usr/local/bin/carthage copy-frameworks
+        ```
 
-#### Main view class setup
+    - Add the input.xcfilelist to the "Input File Lists" section of the Carthage run script phase and the output.xcfilelist to the "Output File Lists" section of the Carthage run script phase
 
-The view in which the contents are to be created must have SpriteKit capabilities, the library Boken Engine uses for all content rendering.
+    *Using [CocoaPods](https://cocoapods.org/)*
 
-In order to accomplish this, the Main View instance must have SKView class. To do so, please follow the following steps:
+    To add BokenEngine to a project using CocoaPods:
 
-- On the project navigator, click on the main view storyboard (by default, "Main.storyboard")
-- Click on the View element, usually under the "View Controller Scene" and "View Controller" elements.
-- Click on the Identity Inspector.
-- Change the Custom class to SKView.
+    - Create (or modify) a podFile with this content:
 
-### 6.4 Content creation
+        ```ruby
+        target 'MyApp' do
+        pod 'BokenEngine'
+        end
+        ```
+
+    - and install it with
+
+        ```bash
+        pod install
+        ```
+
+    This will create (or modify) a .xcworkspace in which the framework is built and ready to be referenced by the application project. For more information, please check [the CocoaPods guide](https://guides.cocoapods.org/using/using-cocoapods.html).
+
+5. Initialize the framework for its usage with two final steps:
+
+    - Instantiate SceneManager class.
+
+        The main class of the Engine is the SceneManager. To use the engine, just instantiate it, pass your application root view to it, and call the Title Scene loader.
+        Typically, this is done in the viewDidLoad method of the ViewController class (ViewController.swift file) this way:
+
+        ```swift
+        import BokenEngine
+
+        class ViewController: UIViewController {
+            override func viewDidLoad() {
+                super.viewDidLoad()
+
+                // Boken Engine initialization
+                let sceneManager = try! SceneManager()
+                sceneManager.setRootView(self.view)
+                try! sceneManager.loadTitleScene()
+            }
+        }
+        ```
+
+    - Set SpriteKit capabilities on Main view class
+
+        The view in which the contents are to be created must have SpriteKit capabilities, the library Boken Engine uses for all content rendering.
+
+        In order to accomplish this, the Main View instance must have SKView class. To do so:
+
+        - On the project navigator, click on the main view storyboard (by default, "Main.storyboard")
+        - Click on the View element, usually under the "View Controller Scene" and "View Controller" elements.
+
+        ![View element](./doc/images/how-to-use-07-view-element.png)
+
+        - Click on the Identity Inspector and change the Custom Class to "SKView".
+
+        ![Change the Custom class to SKView](./doc/images/how-to-use-08-change-custom-class-to-SKView-on-identity-Inspector.png)
+
+6. Create the contents file and put it along with the image/audio assets into the project (see "6.2. Content creation" section).
+7. (optional) Add any additional feature to your application.
+8. Publish your application.
+
+### 6.2 Content creation
 
 We suggest putting all the specific content of the application (Story description + Image files + Audio files) into a separate folder within the application structure, but this is not necessary.
 
@@ -257,26 +283,25 @@ With the Boken Engine, this content description, along with an asset catalog wit
 
 For more information about content creation, refer to the [Content Creation Guide](doc/contents-creation-guide.md).
 
-### 6.5 How to run tests
+### 6.3 How to run tests
 
 To run the Framework tests, open its project on XCode and press Command + U. More about running tests and checking results can be found on the [official Apple documentation](https://developer.apple.com/library/archive/documentation/DeveloperTools/Conceptual/testing_with_xcode/chapters/05-running_tests.html). 
 
-### 6.5 How to write and run additional tests
+### 6.4 How to write and run additional tests
 
 We use the [XCTest Framework](https://developer.apple.com/documentation/xctest) for unit testing. New tests to increase code coverage will be welcomed. Please refer to the [Contribution Guidelines](CONTRIBUTING.md) to comply with coding standards.
 
-### 6.6 Advanced usage
+### 6.5 Advanced usage
 
-
-#### 6.6.1 Adjustments for horizontal (landscape) device orientation
+#### 6.5.1 Adjustments for horizontal (landscape) device orientation
 
 The position, scale and font size attributes in the JSON contents description file can be overloaded using "H" suffix. This way, each element will have a position and size on vertical (portrait) device orientation and anothar one on horizontal (landscape) orientation.
 
-#### 6.6.2 Contents description passed as a string
+#### 6.5.2 Contents description passed as a string
 
 If the Scene Manager is initialized with a string, instead of fetching the JSON story contents from the default file path, the string will be parsed as the story contents. This way the contents can be dinamically generated from a database or any other source.
 
-#### 6.6.3 Transformations
+#### 6.5.3 Transformations
 
 The images and the text labels can be animated via "transformations". Currently, there are two kinds of transformations: scale (size) and rotation. They can be combined. Each transformation is defined by its type, the final value for the property (scale or rotation) and how many seconds it takes to reach this value. Full description of the transformations syntax can be found at the [Content Creation Guide](doc/contents-creation-guide.md).
 
