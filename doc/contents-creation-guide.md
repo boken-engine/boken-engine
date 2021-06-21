@@ -141,11 +141,25 @@ In the previous section we defined the collection of elements to be rendered as 
 
 There are three properties in the JSON file that refers to external files within the project structure:
 
-**ImageFile** of the Image Element description (JPEG)
-**Audio** of the Scene description (WAV)
-**backgroundMusic** of the App description (MP3)
+- **ImageFile** of the Image Element description (JPEG)
+- **Audio** of the Scene description (WAV)
+- **backgroundMusic** of the App description (MP3)
 
-Those are references to assets that must be present inside the project as part of Assets Catalogues (.xcassets folders). To know how to create them, please refer to [this post](https://www.hackingwithswift.com/example-code/xcode/how-to-load-assets-from-xcode-asset-catalogs) at [Hacking with Swift](https://www.hackingwithswift.com).
+Those are references to assets that must be present inside the project as part of Assets Catalogues (.xcassets folders).
+
+A detailed explanation on how to create an asset catalog in your project is described at [this Hacking with Swift's post](https://www.hackingwithswift.com/example-code/xcode/how-to-load-assets-from-xcode-asset-catalogs) but basically you have to do the following:
+
+Right-click on your project and choose "New File".
+
+![New asset catalog](./images/contents-creation-guide-01-new-asset-catalog.png)
+
+From "iOS" choose "Resource" then "Asset Catalog", then click "Next" and name your catalog. You can now select your new asset catalog in Xcode, and drag pictures directly into it.
+
+![New asset folder](./images/contents-creation-guide-02-assets-folder.png)
+
+Images stored inside asset catalog all retain their original filename, minus the path extension part. For example, "king-castle.png" will just appear as "king-castle" inside your asst catalog, and that's how you should refer to it while loading too.
+
+Asset catalogs automatically keep track of Retina and Retina HD images, but it's recommended that you name your images smartly to help make the process more smooth: king-castle.png, king-castle@2x.png and king-castle@3x.png are the best way to name your files for standard, Retina and Retina HD resolutions respectively.
 
 <a name="section-example"></a>
 ## 7. Content description file example
