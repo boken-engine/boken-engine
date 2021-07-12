@@ -11,7 +11,7 @@ import SpriteKit
 
 class MockSKView: SKView {
     init() {
-        super.init(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        super.init(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         print("background set")
         self.backgroundColor = UIColor.black
     }
@@ -24,7 +24,7 @@ class MockSKView: SKView {
 
 class ElementFactoryTests: XCTestCase {
 
-    let elementFactory = ElementFactory(view: MockSKView(), scene: SKScene())
+    let elementFactory = ElementFactory(view: MockSKView(), scene: SKScene(size: CGSize(width: 100, height: 50)))
 
     func testNodeLabelCreation() {
         let nodeString = """
@@ -52,7 +52,7 @@ class ElementFactoryTests: XCTestCase {
                             "type": "image",
                             "imageFile": "saturn",
                             "posX": 10,
-                            "posY": 20,
+                            "posY": 15,
                             "scale": 0.5,
                             "scaleH": 0.4,
                         }
@@ -61,7 +61,7 @@ class ElementFactoryTests: XCTestCase {
         let imageNode = elementFactory.getImageNode(description: description!)
         XCTAssertNotNil(imageNode)
         XCTAssert(imageNode.position.x == 1000)
-        XCTAssert(imageNode.position.y == 2000)
+        XCTAssert(imageNode.position.y == 750)
     }
 
     func testAutoScaledImageCreation() {
@@ -76,11 +76,16 @@ class ElementFactoryTests: XCTestCase {
                         }
                         """
         let description = try? JSONDecoder().decode(ImageDescription.self, from: nodeString.data(using: .utf8)!)
-        let imageNode = elementFactory.getImageNode(description: description!)
-        XCTAssertNotNil(imageNode)
-        XCTAssert(imageNode.xScale == 0.0078125)
+        let coverImageNode = elementFactory.getImageNode(description: description!)
+        XCTAssertNotNil(coverImageNode)
+        XCTAssert(coverImageNode.xScale == 0.78125)
+        description!.scale = -1
+        let fitImageNode = elementFactory.getImageNode(description: description!)
+        XCTAssertNotNil(fitImageNode)
+        XCTAssert(fitImageNode.xScale == 0.390625)
     }
 
+    
     func testShapeCreation() {
         let nodeString = """
                             {
@@ -97,9 +102,9 @@ class ElementFactoryTests: XCTestCase {
         let frame = shapeNode.calculateAccumulatedFrame()
         XCTAssertNotNil(shapeNode)
         XCTAssert(frame.origin.x == 25)
-        XCTAssert(frame.origin.y == 15)
+        XCTAssert(frame.origin.y == 7.5)
         XCTAssert(frame.size.width == 100)
-        XCTAssert(frame.size.height == 30)
+        XCTAssert(frame.size.height == 15)
     }
 
     func testButtonCreation() {
