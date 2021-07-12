@@ -21,12 +21,15 @@ enum NavigationOptions: String, Decodable {
 
 struct Branch: Decodable {
     let label: String
-    let target: String
+    let target: String?
+    let callbackClass: String?
+    let callbackMethod: String?
 }
 
 enum TransformationType: String, Decodable {
     case scale
     case rotation
+    case swipe
 }
 
 enum FontStyle: String, Decodable {
@@ -38,8 +41,12 @@ enum FontStyle: String, Decodable {
 
 struct TransformationDescription: Decodable {
     let type: TransformationType
-    let toValue: Float
+    let toValue: Float?
     let toValueH: Float?
+    let toPosX: Float?
+    let toPosXH: Float?
+    let toPosY: Float?
+    let toPosYH: Float?
     let duration: Float
 }
 

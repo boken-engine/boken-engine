@@ -99,4 +99,35 @@ class SceneFactoryTests: XCTestCase {
         }
     }
 
+    func testCustomButtonCallBack() {
+
+        let customCallBackContent = """
+        {"appTitle": "prototype",
+         "scenes": [{"sceneId": "Title",
+                    "elements": { "elementsArray": [{
+                        "type": "textLabel", "content": "Intro", "posX": 0.5, "posY": 0.85, "fontSize": 28
+                    }], },
+                    "branches": [{"label": "Testme"} ],
+                    "navigation": "next"}]}
+        """
+        let buttonSignature = "Title.Testme"
+        var callbackExecuted = false
+        let toggleCallback = { callbackExecuted = !callbackExecuted }
+        var sceneManager: SceneManager
+        do {
+            sceneManager = try TestableSceneManager(storyContents: customCallBackContent)
+            let sceneFactory = TestableSceneFactory(rootView: MockSKView(), sceneManager: sceneManager)
+            try sceneFactory.setCallbackToButton(callBack: toggleCallback,
+                                                 buttonSignature: buttonSignature)
+            sceneFactory.executeCallBackIfExists(sceneName: "Title", branchLabel: "Testme")
+            XCTAssertTrue(callbackExecuted)
+            XCTAssertThrowsError(try sceneFactory.setCallbackToButton(callBack: toggleCallback,
+                                                                      buttonSignature: buttonSignature))
+            XCTAssertTrue(sceneFactory.unsetButtonCallback(buttonSignature: buttonSignature))
+            XCTAssertFalse(sceneFactory.unsetButtonCallback(buttonSignature: buttonSignature))
+        } catch {
+            XCTFail("An error occurred in testCustomButtonCallBack")
+        }
+    }
+
 }

@@ -74,12 +74,12 @@ jobs:
       - name: GitHub Action for SwiftLint
         uses: norio-nomura/action-swiftlint@3.2.1
   Tailor:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - name: Install Tailor
-        run: |
+        run: |          
           brew update
-          brew install tailor      
+          brew install tailor   
       - name: Checkout
         uses: actions/checkout@v2          
       - name: Static analysis using Tailor
