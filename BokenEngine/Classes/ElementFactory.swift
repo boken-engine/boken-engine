@@ -97,11 +97,25 @@ class ElementFactory {
         applyTransformationsToElement(description.transformations, label)
         return label
     }
+    
+    func getImageAspect(_ image: SKSpriteNode) -> CGFloat {
+        return image.size.width / image.size.height
+    }
+    
+    func getDeviceAspect() -> CGFloat {
+        return self.scene.size.width / self.scene.size.height
+    }
 
     func setCoverScaleToImage(_ image: SKSpriteNode) {
-        let imageAspect = image.size.width / image.size.height
-        let deviceAspect = self.scene.size.width / self.scene.size.height
-        if imageAspect > deviceAspect {
+        if getImageAspect(image) > getDeviceAspect() {
+            image.setScale(self.scene.size.height / image.size.height)
+        } else {
+            image.setScale(self.scene.size.width / image.size.width)
+        }
+    }
+    
+    func setFitScaleToImage(_ image: SKSpriteNode) {
+        if getImageAspect(image) < getDeviceAspect() {
             image.setScale(self.scene.size.height / image.size.height)
         } else {
             image.setScale(self.scene.size.width / image.size.width)
@@ -109,12 +123,15 @@ class ElementFactory {
     }
 
     func applyImageScale(image: SKSpriteNode, description: ImageDescription) {
-        let scale = getFinalElementScale(scale: description.scale,
-                                         scaleH: description.scaleH,
-                                         useOnlyYAxis: false)
-        if scale == 0 {
+        switch description.scale {
+        case 0:
             setCoverScaleToImage(image)
-        } else {
+        case -1:
+            setFitScaleToImage(image)
+        default:
+            let scale = getFinalElementScale(scale: description.scale,
+                                             scaleH: description.scaleH,
+                                             useOnlyYAxis: false)
             image.setScale(scale)
         }
     }
