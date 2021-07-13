@@ -62,20 +62,23 @@ class ElementFactory {
                                      (style == FontStyle.bold || style == FontStyle.boldItalic ? "Bold" : "") +
                                      (style == FontStyle.italic || style == FontStyle.boldItalic ? "Oblique" : "")
         let label = SKLabelNode(fontNamed: fontName)
-        label.text = text
-        label.fontSize = CGFloat(size)
+        let labelText = NSMutableAttributedString(string: text)
+        let range = NSMakeRange(0,text.count)
+        if color == nil {
+            labelText.addAttribute(.foregroundColor, value: getOppositeFromBackgroundColor(scene: self.scene), range: range)
+            labelText.addAttribute(.backgroundColor, value: self.scene.backgroundColor, range: range)
+        } else {
+            labelText.addAttribute(.foregroundColor, value: color!, range: range)
+        }
+        labelText.addAttribute(.font, value: UIFont(name: fontName, size: CGFloat(size))!, range: range)
+        label.attributedText = labelText
         label.position = position
         label.lineBreakMode = NSLineBreakMode.byWordWrapping
         label.preferredMaxLayoutWidth = view.bounds.width * 0.9
         label.numberOfLines = 0
         label.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
-        label.accessibilityLabel = "label: "+label.text!
+        label.accessibilityLabel = "label: "+text
         label.name = label.accessibilityLabel
-        if color == nil {
-            label.fontColor = getOppositeFromBackgroundColor(scene: self.scene)
-        } else {
-            label.fontColor = color
-        }
         return label
     }
 
