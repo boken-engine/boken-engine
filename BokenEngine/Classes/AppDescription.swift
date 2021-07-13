@@ -78,6 +78,7 @@ class TextLabelDescription: ElementDescription {
     var fontSize: Float = 10.0
     var fontSizeH: Float?
     var style: FontStyle?
+    var addBackground: Bool?
     var transformations: [TransformationDescription]?
 
     private enum CodingKeys: String, CodingKey {
@@ -86,6 +87,7 @@ class TextLabelDescription: ElementDescription {
         case fontSizeH
         case style
         case transformations
+        case addBackground
     }
 
     required init(from decoder: Decoder) throws {
@@ -98,6 +100,7 @@ class TextLabelDescription: ElementDescription {
             self.style = FontStyle.normal
         }
         self.transformations = try? container.decode([TransformationDescription].self, forKey: .transformations)
+        self.addBackground = try? container.decode(Bool.self, forKey: .addBackground)
         try super.init(from: decoder)
     }
 }
