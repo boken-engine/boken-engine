@@ -109,11 +109,34 @@ class ElementFactory {
         applyTransformationsToElement(description.transformations, label)
         return label
     }
-    
+
+    func addBackgroundToNode(node: SKNode, bounds: CGRect) {
+        let shape = SKShapeNode(rect: CGRect(x: bounds.minX-10,
+                                             y: bounds.minY-10,
+                                             width: bounds.width+20,
+                                             height: bounds.height+20))
+        shape.fillColor = self.scene.backgroundColor.withAlphaComponent(0.5)
+        shape.strokeColor = UIColor.clear
+        node.addChild(shape)
+    }
+
+    func getTextAndBackgroundNode(description: TextLabelDescription) -> SKNode {
+        let textAndBackgroundNode = SKNode()
+        let textNode = getTextNode(description: description)
+        if description.addBackground == true {
+            let textNodeBounds = textNode.calculateAccumulatedFrame()
+            addBackgroundToNode(node: textAndBackgroundNode, bounds: textNodeBounds)
+        }
+        textAndBackgroundNode.addChild(textNode)
+        textAndBackgroundNode.accessibilityLabel = "label: "+textNode.text!
+        textAndBackgroundNode.name = textNode.accessibilityLabel
+        return textAndBackgroundNode
+    }
+
     func getImageAspect(_ image: SKSpriteNode) -> CGFloat {
         return image.size.width / image.size.height
     }
-    
+
     func getDeviceAspect() -> CGFloat {
         return self.scene.size.width / self.scene.size.height
     }
@@ -125,7 +148,7 @@ class ElementFactory {
             image.setScale(self.scene.size.width / image.size.width)
         }
     }
-    
+
     func setFitScaleToImage(_ image: SKSpriteNode) {
         if getImageAspect(image) < getDeviceAspect() {
             image.setScale(self.scene.size.height / image.size.height)
@@ -212,7 +235,7 @@ class ElementFactory {
         // tailor:off
         switch elementDescription.type {
         case "textLabel":
-            return getTextNode(description: elementDescription as! TextLabelDescription)
+            return getTextAndBackgroundNode(description: elementDescription as! TextLabelDescription)
         case "image":
             return getImageNode(description: elementDescription as! ImageDescription)
         case "shape":

@@ -26,7 +26,7 @@ class ElementFactoryTests: XCTestCase {
 
     let elementFactory = ElementFactory(view: MockSKView(), scene: SKScene(size: CGSize(width: 100, height: 50)))
 
-    func testNodeLabelCreation() {
+    func testTextLabelCreation() {
         let nodeString = """
                         {
                             "type": "textLabel",
@@ -44,6 +44,51 @@ class ElementFactoryTests: XCTestCase {
         XCTAssert(textNode.fontColor == UIColor.white)
         XCTAssert(textNode.text == "test")
         XCTAssert(textNode.fontName == "Helvetica-Oblique")
+    }
+
+    func testTextLabelWithoutBackgroundCreation() {
+        let nodeString = """
+                        {
+                            "type": "textLabel",
+                            "content": "test",
+                            "posX": 0.5,
+                            "posY": 0.86,
+                            "fontSize": 36,
+                            "fontSizeH": 48,
+                            "style": "italic"
+                        }
+                        """
+        let description = try? JSONDecoder().decode(TextLabelDescription.self, from: nodeString.data(using: .utf8)!)
+        let textNode = elementFactory.getTextAndBackgroundNode(description: description!)
+        XCTAssertNotNil(textNode)
+        XCTAssert(textNode.children.count == 1)
+        XCTAssertNotNil(textNode.children[0] as? SKLabelNode)
+    }
+
+    func testTextLabelWithBackgroundCreation() {
+        let nodeString = """
+                        {
+                            "type": "textLabel",
+                            "content": "test",
+                            "posX": 0.5,
+                            "posY": 0.86,
+                            "fontSize": 36,
+                            "fontSizeH": 48,
+                            "style": "italic",
+                            "addBackground": true
+                        }
+                        """
+        let description = try? JSONDecoder().decode(TextLabelDescription.self, from: nodeString.data(using: .utf8)!)
+        let textNode = elementFactory.getTextAndBackgroundNode(description: description!)
+        XCTAssertNotNil(textNode)
+        XCTAssert(textNode.children.count == 2)
+        let textNodeChild = textNode.children[1] as? SKLabelNode
+        XCTAssertNotNil(textNode)
+        XCTAssert(textNodeChild?.fontColor == UIColor.white)
+        XCTAssert(textNodeChild?.text == "test")
+        XCTAssert(textNodeChild?.fontName == "Helvetica-Oblique")
+        let shapeNodeChild = textNode.children[0] as? SKShapeNode
+        XCTAssertNotNil(shapeNodeChild)
     }
 
     func testImageCreation() {
@@ -85,7 +130,6 @@ class ElementFactoryTests: XCTestCase {
         XCTAssert(fitImageNode.xScale == 0.390625)
     }
 
-    
     func testShapeCreation() {
         let nodeString = """
                             {
