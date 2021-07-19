@@ -120,12 +120,10 @@ class ElementFactory {
         node.addChild(shape)
     }
 
-    // The NOSONAR comment below is used to remove a false-positive "smell" in the specified line.
-    // In this case, the 'true' literal is used as addBackground is an optional Bool than can be nil
     func getTextAndBackgroundNode(description: TextLabelDescription) -> SKNode {
         let textAndBackgroundNode = SKNode()
         let textNode = getTextNode(description: description)
-        if description.addBackground == true { // NOSONAR
+        if description.addBackground == true {
             let textNodeBounds = textNode.calculateAccumulatedFrame()
             addBackgroundToNode(node: textAndBackgroundNode, bounds: textNodeBounds)
         }
