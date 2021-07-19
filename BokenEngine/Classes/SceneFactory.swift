@@ -48,7 +48,8 @@ class SceneFactory {
         if let sceneAudio = sceneDescription.audio {
             DispatchQueue.global(qos: .userInitiated).async { [unowned self] in
                 do {
-                    _ = try self.audioManager.playSoundFX(resourceName: sceneAudio)
+                    _ = try self.audioManager.playSoundFX(resourceName: sceneAudio,
+                                                          looping: sceneDescription.audioLooping == true)
                 } catch {
                     print("Warning: scene audio could not be played")
                 }

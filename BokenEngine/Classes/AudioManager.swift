@@ -63,7 +63,7 @@ class AudioManager {
         return true
     }
 
-    func playSoundFX(resourceName: String) throws -> Bool {
+    func playSoundFX(resourceName: String, looping: Bool = false) throws -> Bool {
         let soundPlayer: AVAudioPlayer
         do {
             soundPlayer = try createAudioPlayer(forResource: resourceName,
@@ -71,7 +71,7 @@ class AudioManager {
         } catch {
             throw error
         }
-        soundPlayer.numberOfLoops = 0
+        soundPlayer.numberOfLoops = (looping ? -1 : 0)
         soundPlayer.play()
         return true
     }

@@ -192,6 +192,7 @@ class SceneDescription: Decodable {
     let background: String?
     let navigation: NavigationOptions
     let audio: String?
+    let audioLooping: Bool?
 }
 
 struct AppDescription: Decodable {
