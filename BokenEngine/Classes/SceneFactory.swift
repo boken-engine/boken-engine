@@ -205,7 +205,7 @@ class SceneFactory {
         if let branches = sceneDescription.branches {
             branches.forEach { branch in
                 addBranchButtonToScene(scene, branch: branch, offsetY: offsetY)
-                offsetY += Int(CGFloat((isLandscapeMode() ? 120 : 60)) * scaleFactor.y)
+                offsetY += Int(CGFloat((isLandscapeMode() ? 90 : 60)) * scaleFactor.y)
             }
         }
     }
