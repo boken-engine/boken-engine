@@ -47,6 +47,10 @@ class ElementFactory {
                 case TransformationType.swipe:
                     element.run(SKAction.move(to: getTransformationDestinationPoint(transformation),
                                               duration: TimeInterval(transformation.duration)))
+                case TransformationType.fade:
+                    element.alpha = CGFloat(1 - getTransformationFinalValue(transformation))
+                    element.run(SKAction.fadeAlpha(to: CGFloat(getTransformationFinalValue(transformation)),
+                                                   duration: TimeInterval(transformation.duration)))
                 }
             }
         }

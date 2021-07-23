@@ -30,6 +30,7 @@ enum TransformationType: String, Decodable {
     case scale
     case rotation
     case swipe
+    case fade
 }
 
 enum FontStyle: String, Decodable {
