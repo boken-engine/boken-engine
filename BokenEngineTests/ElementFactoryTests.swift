@@ -34,16 +34,14 @@ class ElementFactoryTests: XCTestCase {
                             "posX": 0.5,
                             "posY": 0.86,
                             "fontSize": 36,
-                            "fontSizeH": 48,
-                            "style": "italic"
+                            "fontSizeH": 48
                         }
                         """
         let description = try? JSONDecoder().decode(TextLabelDescription.self, from: nodeString.data(using: .utf8)!)
         let textNode = elementFactory.getTextNode(description: description!)
         XCTAssertNotNil(textNode)
         XCTAssert(textNode.fontColor == UIColor.white)
-        XCTAssert(textNode.text == "test")
-        XCTAssert(textNode.fontName == "Helvetica-Oblique")
+        XCTAssert(textNode.attributedText?.string == "test")
     }
 
     func testTextLabelWithoutBackgroundCreation() {
@@ -73,8 +71,7 @@ class ElementFactoryTests: XCTestCase {
                             "posX": 0.5,
                             "posY": 0.86,
                             "fontSize": 36,
-                            "fontSizeH": 48,
-                            "style": "italic",
+                            "fontSizeH": 48,s
                             "addBackground": true
                         }
                         """
@@ -85,8 +82,7 @@ class ElementFactoryTests: XCTestCase {
         let textNodeChild = textNode.children[1] as? SKLabelNode
         XCTAssertNotNil(textNode)
         XCTAssert(textNodeChild?.fontColor == UIColor.white)
-        XCTAssert(textNodeChild?.text == "test")
-        XCTAssert(textNodeChild?.fontName == "Helvetica-Oblique")
+        XCTAssert(textNodeChild?.attributedText?.string == "test")
         let shapeNodeChild = textNode.children[0] as? SKShapeNode
         XCTAssertNotNil(shapeNodeChild)
     }

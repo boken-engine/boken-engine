@@ -141,15 +141,17 @@ class SceneFactory {
         }
     }
 
-    func addBranchButtonToScene(_ scene: SKScene, branch: Branch, offsetY: Int) {
+    func addBranchButtonToScene(_ scene: SKScene, branch: Branch, offsetY: Int) -> Int {
         let buttonWidth = isLandscapeMode() ? Int(scene.size.width * 0.3) : Int(scene.size.width * 0.9)
         let branchButton = elementFactory.getButtonNode(width: buttonWidth, labelContent: branch.label)
-        branchButton.position = CGPoint(x: scene.size.width / 2, y: CGFloat(offsetY))
+        let branchButtonHeight = Int(branchButton.calculateAccumulatedFrame().height) + 10
+        branchButton.position = CGPoint(x: scene.size.width / 2, y: CGFloat(offsetY + (branchButtonHeight/2)))
         branchButton.onClick {
             self.executeCallBackIfExists(sceneName: scene.name!, branchLabel: branch.label)
             self.goToBranchSceneIfDefined(branch)
         }
         scene.addChild(branchButton)
+        return branchButtonHeight
     }
 
     @objc func swipeLeftResponder() {
@@ -201,12 +203,10 @@ class SceneFactory {
     func createBranchesButtons(sceneDescription: SceneDescription,
                                scene: SKScene,
                                view: SKView) {
-        let scaleFactor = getScaleFactor(view: view)
-        var offsetY = Int(75 * scaleFactor.y)
+        var offsetY = 0
         if let branches = sceneDescription.branches {
             branches.forEach { branch in
-                addBranchButtonToScene(scene, branch: branch, offsetY: offsetY)
-                offsetY += Int(CGFloat((isLandscapeMode() ? 90 : 60)) * scaleFactor.y)
+                offsetY += addBranchButtonToScene(scene, branch: branch, offsetY: offsetY)
             }
         }
     }
