@@ -71,7 +71,7 @@ class ElementFactoryTests: XCTestCase {
                             "posX": 0.5,
                             "posY": 0.86,
                             "fontSize": 36,
-                            "fontSizeH": 48,s
+                            "fontSizeH": 48,
                             "addBackground": true
                         }
                         """
