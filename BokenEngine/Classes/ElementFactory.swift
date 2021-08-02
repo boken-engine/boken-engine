@@ -58,29 +58,44 @@ class ElementFactory {
     }
 
     func createSKLabelNode(text: String,
-                           size: Float,
-                           position: CGPoint,
-                           style: FontStyle,
-                           color: UIColor? = nil) -> SKLabelNode {
+                           labelWidth: Float,
+                           position: CGPoint) -> SKLabelNode {
+        let label = SKLabelNode()
+        let labelText = NSMutableAttributedString(string: text)
+        label.attributedText = labelText
+        label.position = position
+        label.lineBreakMode = NSLineBreakMode.byWordWrapping
+        label.preferredMaxLayoutWidth = CGFloat(labelWidth)
+        label.numberOfLines = 0
+        label.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
+        label.accessibilityLabel = "label: "+text
+        label.name = label.accessibilityLabel
+        return label
+    }
+
+    func setSKLabelAttributes(label: SKLabelNode,
+                              fontSize: Float,
+                              style: FontStyle,
+                              centered: Bool,
+                              color: UIColor? = nil) {
+        let labelText = NSMutableAttributedString(string: label.attributedText!.string)
         let fontName = "Helvetica" + (style != FontStyle.normal ? "-" : "") +
                                      (style == FontStyle.bold || style == FontStyle.boldItalic ? "Bold" : "") +
                                      (style == FontStyle.italic || style == FontStyle.boldItalic ? "Oblique" : "")
-        let label = SKLabelNode(fontNamed: fontName)
-        label.text = text
-        label.fontSize = CGFloat(size)
-        label.position = position
-        label.lineBreakMode = NSLineBreakMode.byWordWrapping
-        label.preferredMaxLayoutWidth = view.bounds.width * 0.9
-        label.numberOfLines = 0
-        label.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
-        label.accessibilityLabel = "label: "+label.text!
-        label.name = label.accessibilityLabel
+        let range = NSRange(location: 0, length: label.attributedText!.string.count)
+        labelText.addAttribute(.font, value: UIFont(name: fontName, size: CGFloat(fontSize))!, range: range)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
         if color == nil {
-            label.fontColor = getOppositeFromBackgroundColor(scene: self.scene)
+            let oppositeColor = getOppositeFromBackgroundColor(scene: self.scene)
+            labelText.addAttribute(.foregroundColor, value: oppositeColor, range: range)
         } else {
-            label.fontColor = color
+            labelText.addAttribute(.foregroundColor, value: color!, range: range)
         }
-        return label
+        if centered {
+            labelText.addAttribute(.paragraphStyle, value: paragraphStyle, range: range)
+        }
+        label.attributedText = labelText
     }
 
     func getFinalElementPosition(description: ElementDescription) -> CGPoint {
@@ -105,20 +120,21 @@ class ElementFactory {
     func getTextNode(description: TextLabelDescription) -> SKLabelNode {
         let position =  getFinalElementPosition(description: description)
         let label = createSKLabelNode(text: description.content,
-                                      size: Float(getFinalElementScale(scale: description.fontSize,
-                                                                       scaleH: description.fontSizeH,
-                                                                       useOnlyYAxis: true)),
-                                      position: position,
-                                      style: description.style!)
+                                      labelWidth: Float(view.bounds.width) * 0.9,
+                                      position: position)
+        setSKLabelAttributes(label: label,
+                             fontSize: Float(getFinalElementScale(scale: description.fontSize,
+                                                                  scaleH: description.fontSizeH,
+                                                                  useOnlyYAxis: true)),
+                             style: description.style!,
+                             centered: false)
         applyTransformationsToElement(description.transformations, label)
         return label
     }
 
     func addBackgroundToNode(node: SKNode, bounds: CGRect) {
-        let shape = SKShapeNode(rect: CGRect(x: bounds.minX-10,
-                                             y: bounds.minY-10,
-                                             width: bounds.width+20,
-                                             height: bounds.height+20))
+        let shape = SKShapeNode(rect: CGRect(x: bounds.minX-10, y: bounds.minY-10,
+                                             width: bounds.width+20, height: bounds.height+20))
         shape.fillColor = self.scene.backgroundColor.withAlphaComponent(0.5)
         shape.strokeColor = UIColor.clear
         node.addChild(shape)
@@ -132,7 +148,7 @@ class ElementFactory {
             addBackgroundToNode(node: textAndBackgroundNode, bounds: textNodeBounds)
         }
         textAndBackgroundNode.addChild(textNode)
-        textAndBackgroundNode.accessibilityLabel = "label: "+textNode.text!
+        textAndBackgroundNode.accessibilityLabel = "label: "+textNode.attributedText!.string
         textAndBackgroundNode.name = textNode.accessibilityLabel
         return textAndBackgroundNode
     }
@@ -146,19 +162,15 @@ class ElementFactory {
     }
 
     func setCoverScaleToImage(_ image: SKSpriteNode) {
-        if getImageAspect(image) > getDeviceAspect() {
-            image.setScale(self.scene.size.height / image.size.height)
-        } else {
+        getImageAspect(image) > getDeviceAspect() ?
+            image.setScale(self.scene.size.height / image.size.height) :
             image.setScale(self.scene.size.width / image.size.width)
-        }
     }
 
     func setFitScaleToImage(_ image: SKSpriteNode) {
-        if getImageAspect(image) < getDeviceAspect() {
-            image.setScale(self.scene.size.height / image.size.height)
-        } else {
+        getImageAspect(image) < getDeviceAspect() ?
+            image.setScale(self.scene.size.height / image.size.height) :
             image.setScale(self.scene.size.width / image.size.width)
-        }
     }
 
     func applyImageScale(image: SKSpriteNode, description: ImageDescription) {
@@ -168,9 +180,7 @@ class ElementFactory {
         case -1:
             setFitScaleToImage(image)
         default:
-            let scale = getFinalElementScale(scale: description.scale,
-                                             scaleH: description.scaleH,
-                                             useOnlyYAxis: false)
+            let scale = getFinalElementScale(scale: description.scale, scaleH: description.scaleH, useOnlyYAxis: false)
             image.setScale(scale)
         }
     }
@@ -203,10 +213,13 @@ class ElementFactory {
         let button = TouchSpriteNode(color: UIColor(red: 0, green: 0, blue: 0, alpha: 0),
                                      size: size)
         let label = createSKLabelNode(text: name,
-                                      size: 1,
-                                      position: CGPoint(x: 1, y: 1),
-                                      style: FontStyle.normal,
-                                      color: UIColor(red: 0, green: 0, blue: 0, alpha: 0.0))
+                                      labelWidth: Float(view.bounds.width) * 0.9,
+                                      position: CGPoint(x: 1, y: 1))
+        setSKLabelAttributes(label: label,
+                             fontSize: 1,
+                             style: FontStyle.normal,
+                             centered: true,
+                             color: UIColor(red: 0, green: 0, blue: 0, alpha: 0.0))
         button.accessibilityLabel = "button: " + name
         button.name = button.accessibilityLabel
         button.addChild(label)
@@ -215,14 +228,20 @@ class ElementFactory {
 
     func getButtonNode(width: Int, labelContent: String) -> TouchSpriteNode {
         let isHorizontal = isLandscapeMode()
+        let label = createSKLabelNode(text: labelContent,
+                                      labelWidth: Float(width),
+                                      position: CGPoint(x: 0, y: 0))
+        setSKLabelAttributes(label: label,
+                             fontSize: Float((isHorizontal ? 42 : 28) * scaleFactor.y),
+                             style: FontStyle.normal,
+                             centered: true,
+                             color: UIColor.white)
+        let labelBounds = label.calculateAccumulatedFrame()
+        label.position = CGPoint(x: 0, y: -Int(labelBounds.height / 2))
         let button = TouchSpriteNode(color: UIColor(red: 0.25, green: 0.25, blue: 0.25, alpha: 0.5),
                                      size: CGSize(width: width,
-                                                  height: Int((isHorizontal ? 75 : 50) * scaleFactor.y)))
-        let label = createSKLabelNode(text: labelContent,
-                                      size: Float((isHorizontal ? 42 : 28) * scaleFactor.y),
-                                      position: CGPoint(x: 0, y: (isHorizontal ? -30 : -17) * scaleFactor.y),
-                                      style: FontStyle.normal,
-                                      color: UIColor.white)
+                                                  height: Int(labelBounds.height * 1.2)))
+        button.position = CGPoint(x: 0, y: 0)
         button.accessibilityLabel = "button: "+labelContent
         button.name = button.accessibilityLabel
         button.addChild(label)
