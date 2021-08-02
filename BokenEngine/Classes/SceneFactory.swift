@@ -203,9 +203,11 @@ class SceneFactory {
     func createBranchesButtons(sceneDescription: SceneDescription,
                                scene: SKScene,
                                view: SKView) {
+        let scaleFactor = getScaleFactor(view: view)
+        var offsetY = Int(25 * scaleFactor.y)
         if let branches = sceneDescription.branches {
             branches.forEach { branch in
-                offsetY += addBranchButtonToScene(scene, branch: branch, offsetY: 25)
+                offsetY += addBranchButtonToScene(scene, branch: branch, offsetY: offsetY)
             }
         }
     }
