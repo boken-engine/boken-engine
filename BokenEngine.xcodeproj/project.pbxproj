@@ -30,6 +30,7 @@
 		5D13A4AB25B8921F00143BF5 /* GesturesManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D13A4AA25B8921F00143BF5 /* GesturesManagerTests.swift */; };
 		5D4122E825B974F700BEDA49 /* UtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D4122E725B974F700BEDA49 /* UtilsTests.swift */; };
 		5D75694925D2C0930030DFE0 /* BokenEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 5D75694725D2BF710030DFE0 /* BokenEngine.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5D85A60026B979AE00D92455 /* RotationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D85A5FF26B979AE00D92455 /* RotationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 		5D13A4AA25B8921F00143BF5 /* GesturesManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GesturesManagerTests.swift; sourceTree = "<group>"; };
 		5D4122E725B974F700BEDA49 /* UtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsTests.swift; sourceTree = "<group>"; };
 		5D75694725D2BF710030DFE0 /* BokenEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BokenEngine.h; path = BokenEngine/BokenEngine.h; sourceTree = SOURCE_ROOT; };
+		5D85A5FF26B979AE00D92455 /* RotationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 				5D0DF70D25B0572D0099F811 /* SceneFactory.swift */,
 				5D0DF70E25B0572D0099F811 /* Utils.swift */,
 				5D0DF70F25B0572D0099F811 /* GesturesManager.swift */,
+				5D85A5FF26B979AE00D92455 /* RotationManager.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 				5D0DF71325B0572D0099F811 /* StoryParser.swift in Sources */,
 				5D0DF71425B0572D0099F811 /* AudioManager.swift in Sources */,
 				5D0DF71125B0572D0099F811 /* UIColorExtension.swift in Sources */,
+				5D85A60026B979AE00D92455 /* RotationManager.swift in Sources */,
 				5D0DF71525B0572D0099F811 /* ElementFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
