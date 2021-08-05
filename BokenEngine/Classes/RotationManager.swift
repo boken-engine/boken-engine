@@ -19,6 +19,10 @@ public class RotationManager {
              object: nil)
     }
 
+    public func performPostRotationActions() {
+        deviceHasRotated()
+    }
+
     @objc func deviceHasRotated() {
         DispatchQueue.main.asyncAfter(deadline: .now()) {
             let currentTime = Int64(Date().timeIntervalSince1970 * 1000)
