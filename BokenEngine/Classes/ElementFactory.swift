@@ -42,7 +42,7 @@ class ElementFactory {
                     element.run(SKAction.scale(to: finalValue * self.maxScaleFactor,
                                                duration: TimeInterval(transformation.duration)))
                 case TransformationType.rotation:
-                    element.run(SKAction.rotate(toAngle: CGFloat(getTransformationFinalValue(transformation)    ),
+                    element.run(SKAction.rotate(toAngle: CGFloat(getTransformationFinalValue(transformation)),
                                                 duration: TimeInterval(transformation.duration)))
                 case TransformationType.swipe:
                     element.run(SKAction.move(to: getTransformationDestinationPoint(transformation),

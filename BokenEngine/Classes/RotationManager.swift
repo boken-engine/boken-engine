@@ -34,4 +34,5 @@ public class RotationManager {
             self.lastUpdateTime = currentTime
         }
     }
+    
 }
