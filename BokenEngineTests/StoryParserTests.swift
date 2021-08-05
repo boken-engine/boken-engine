@@ -64,8 +64,8 @@ class StoryParserTests: XCTestCase {
         }
 
         XCTAssertTrue(thrownError is StoryParserError)
-
         XCTAssertEqual(thrownError as? StoryParserError, .resourceNotFound)
+        XCTAssertTrue(thrownError?.localizedDescription != "")
     }
 
     func testFailingContentsParse() {
@@ -76,8 +76,8 @@ class StoryParserTests: XCTestCase {
         }
 
         XCTAssertTrue(thrownError is StoryParserError)
-
         XCTAssertEqual(thrownError as? StoryParserError, .decodingError)
+        XCTAssertTrue(thrownError?.localizedDescription != "")
     }
 
 }

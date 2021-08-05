@@ -181,6 +181,17 @@ class ElementFactoryTests: XCTestCase {
                                     "toValueH": 1,
                                     "duration": 50
                                 },
+                                {
+                                    "type": "swipe",
+                                    "toPosX": 0.5,
+                                    "toPosY": 0.6,
+                                    "duration": 60
+                                },
+                                {
+                                    "type": "fade",
+                                    "toValue": 1,
+                                    "duration": 3
+                                }
                             ]
                         }
                         """
@@ -189,4 +200,30 @@ class ElementFactoryTests: XCTestCase {
         XCTAssert(imageNode.hasActions())
     }
 
+    func testGetTransformationDestinationPoint() {
+        let nodeString = """
+                        {
+                            "type": "image",
+                            "imageFile": "saturn",
+                            "posX": 0.5,
+                            "posY": 0.5,
+                            "scale": 0.75,
+                            "scaleH": 0.4,
+                            "transformations": [
+                                {
+                                    "type": "swipe",
+                                    "toPosX": 0.25,
+                                    "toPosY": 0.75,
+                                    "toPosXH": 0.1,
+                                    "toPosYH": 0.2,
+                                    "duration": 60
+                                }
+                            ]
+                        }
+                        """
+        let description = try? JSONDecoder().decode(ImageDescription.self, from: nodeString.data(using: .utf8)!)
+        let point = elementFactory.getTransformationDestinationPoint((description?.transformations![0])!)
+        XCTAssert(point.x == 25)
+        XCTAssert(point.y == 37.5)
+    }
 }
