@@ -133,11 +133,11 @@ public class SceneManager {
         }
     }
 
-    public func setCallbackToButton(callBack: @escaping () -> Void, buttonSignature: String ) throws {
+    public func setCallbackToButton(callBack: @escaping () -> Void, buttonSignature: String) throws {
         try sceneFactory.setCallbackToButton(callBack: callBack, buttonSignature: buttonSignature)
     }
 
-    public func unsetButtonCallback(buttonSignature: String ) -> Bool {
+    public func unsetButtonCallback(buttonSignature: String) -> Bool {
         return sceneFactory.unsetButtonCallback(buttonSignature: buttonSignature)
     }
 
