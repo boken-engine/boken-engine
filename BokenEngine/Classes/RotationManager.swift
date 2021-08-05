@@ -28,11 +28,11 @@ public class RotationManager {
                     print("Reloading current scene")
                     try self.sceneManager.loadCurrentScene()
                 } catch {
-                    print("An error ocurred reloading urrent scene")
+                    print("An error ocurred reloading current scene")
                 }
             }
             self.lastUpdateTime = currentTime
         }
     }
-    
+
 }
