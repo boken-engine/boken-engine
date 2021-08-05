@@ -114,7 +114,7 @@ class SceneFactory {
     }
 
     func setCallbackToButton(callBack: @escaping () -> Void, buttonSignature: String) throws {
-        if(buttonsCallbacks.contains(where: { $0.buttonSignature == buttonSignature })) {
+        if buttonsCallbacks.contains(where: { $0.buttonSignature == buttonSignature }) {
             throw SceneFactoryError.callbackAlreadySet
         }
         let buttonCallback = ButtonCallback(buttonSignature: buttonSignature, callBackFunc: callBack)
