@@ -9,20 +9,20 @@ import XCTest
 
 import SpriteKit
 
-class TestableSceneFactory: SceneFactory {
-    var soundHasStarted = false
-    override func playSceneAudio(sceneDescription: SceneDescription) throws {
-        do {
-            try super.playSceneAudio(sceneDescription: sceneDescription)
-            soundHasStarted = (sceneDescription.audio != nil)
-        } catch {
-            throw error
-        }
-    }
-
-}
-
 class SceneFactoryTests: XCTestCase {
+
+    class TestableSceneFactory: SceneFactory {
+        var soundHasStarted = false
+        override func playSceneAudio(sceneDescription: SceneDescription) throws {
+            do {
+                try super.playSceneAudio(sceneDescription: sceneDescription)
+                soundHasStarted = (sceneDescription.audio != nil)
+            } catch {
+                throw error
+            }
+        }
+
+    }
 
     func testFirstLoadScene() {
 
