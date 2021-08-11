@@ -10,9 +10,9 @@ import XCTest
 class TestableSceneManager: SceneManager {
     var musicHasStarted = false
 
-    override func startBackgroundMusic(testMode: Bool = false) throws {
+    override func startBackgroundMusic() throws {
         do {
-            try super.startBackgroundMusic(testMode: true)
+            try super.startBackgroundMusic()
             musicHasStarted = (appDescription.backgroundMusic != nil)
         } catch {
             throw error
@@ -22,10 +22,6 @@ class TestableSceneManager: SceneManager {
 }
 
 class SceneManagerTests: XCTestCase {
-
-    class StoryParser {
-        var testMode: Bool = true
-    }
 
     var sceneManager: TestableSceneManager!
     var mockedView: MockSKView!
