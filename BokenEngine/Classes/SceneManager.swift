@@ -58,7 +58,7 @@ public class SceneManager {
         return currentScene
     }
 
-    func startBackgroundMusic(testMode: Bool = false) throws {
+    func startBackgroundMusic() throws {
         if let backgroundMusicAssetName = appDescription.backgroundMusic {
             do {
                 _ = try audioManager.playBackgroundMusic(resourceName: backgroundMusicAssetName)
