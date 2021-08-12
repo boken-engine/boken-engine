@@ -61,12 +61,10 @@ jobs:
           # 4. Perform the actual testing using the build previously made
           xcodebuild test-without-building -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -derivedDataPath ./output
 
-      - name: Test Coverage
-        uses: maxep/xcodebuild-lcov-action@0.1.0
+      - name: Check coverage
+        uses: mattpolzin/swift-codecov-action@0.6.0
         with:
-            derived-data-path: ./output
-            target: BokenEngine.framework
-            output-file: ./output/lcov.info          
+          MINIMUM_COVERAGE: 85  
   SwiftLint:
     runs-on: ubuntu-latest
     steps:
