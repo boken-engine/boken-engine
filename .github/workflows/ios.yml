@@ -60,35 +60,12 @@ jobs:
 
           # 4. Perform the actual testing using the build previously made
           xcodebuild test-without-building -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -derivedDataPath ./output
-
-  Coverage:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Test
-        env:
-          scheme: ${{ 'default' }}
-          platform: ${{ 'iOS Simulator' }}
-        run: |
-          # 1. Get the list of available iPhone simulators, and get the first one
-          device=`instruments -s -devices | grep -oE 'iPhone.*?[^\(]+' | head -1 | awk '{$1=$1;print}'`
-
-          # 2. Set the default scheme if selected on the previously step
-          if [ $scheme = default ]; then scheme=$(cat default); fi
-
-          # 3. If a workspace is found in the file tree, use it as object to be built. Else, use the project.
-          if [ "`ls -A | grep -i \\.xcworkspace\$`" ]; then filetype_parameter="workspace" && file_to_build="`ls -A | grep -i \\.xcworkspace\$`"; else filetype_parameter="project" && file_to_build="`ls -A | grep -i \\.xcodeproj\$`"; fi
-          file_to_build=`echo $file_to_build | awk '{$1=$1;print}'`
-
-          # 4. Perform the actual testing using the build previously made
-          xcodebuild test-without-building -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -derivedDataPath ./output
-        
+          
       - name: Check coverage
         uses: mattpolzin/swift-codecov-action@0.6.0
         with:
-          MINIMUM_COVERAGE: 85  
-          
+          MINIMUM_COVERAGE: 85
+        
   SwiftLint:
     runs-on: ubuntu-latest
     steps:
