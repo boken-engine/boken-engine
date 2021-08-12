@@ -64,6 +64,8 @@ jobs:
   Coverage:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2              
       - name: Check coverage
         uses: mattpolzin/swift-codecov-action@0.6.0
         with:
