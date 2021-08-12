@@ -62,6 +62,8 @@ jobs:
           xcodebuild test-without-building -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -derivedDataPath ./output
 
   Coverage:
+    container:
+      image: swift:5.4
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
