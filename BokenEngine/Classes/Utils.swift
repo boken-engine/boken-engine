@@ -33,11 +33,15 @@ func getDeviceRelativeCoordinates(view: SKView, posX: Float, posY: Float) -> CGP
 }
 
 func getDeviceOrientation() -> DeviceOrientation {
+    #if targetEnvironment(macCatalyst)
+        return DeviceOrientation.horizontal
+    #else
     if UIApplication.shared.statusBarOrientation.isLandscape {
         return DeviceOrientation.horizontal
     } else {
         return DeviceOrientation.vertical
     }
+    #endif
 }
 
 func isLandscapeMode() -> Bool {
