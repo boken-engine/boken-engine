@@ -3,7 +3,7 @@
 
 An iOS Swift framework for creating slides-based, non-linear visual stories and presentations.
 
-https://boken-engine.dev
+https://www.boken-engine.dev
 
 ## 1. Description
 
