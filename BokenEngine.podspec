@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = "BokenEngine"
-    s.version      = "0.1.3"
+    s.version      = "0.2.0"
     s.summary      = "A Swift framework for creating slides-based, non-linear visual stories and presentations."
     s.description  = <<-DESC
 BOKEN (from Swedish: The Book; also from Japanese: Adventure) ENGINE is a Swift Framework with which any user, only with a few lines of codes, can generate full fledged visual stories or slide based presentations for iOS devices.
@@ -18,6 +18,6 @@ The user just have to provide a human readable JSON description with some predef
     s.module_name = "BokenEngine"
     s.header_dir = "BokenEngine"
     s.platform = :ios
-    s.swift_version = "4.2"
+    s.swift_version = "5.0"
     s.ios.deployment_target  = '12.1'
 end
