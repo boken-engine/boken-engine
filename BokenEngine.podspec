@@ -13,7 +13,7 @@ The user just have to provide a human readable JSON description with some predef
                   'Fernando Torres' => 'Fernando.Torres@hyve.net',
                   'Constantin Bosse' => 'Constantin.Bosse@hyve.net',
                   'Yeray David Rodríguez' => 'yeray.rodriguez@edataconsulting.de' }
-    s.source  = {  :git => 'https://github.com/boken-engine/boken-engine.git', :tag => '0.1.1'  }
+    s.source  = {  :git => 'https://github.com/boken-engine/boken-engine.git', :tag => '0.2.0'  }
     s.source_files = 'BokenEngine/Classes/**/*'
     s.module_name = "BokenEngine"
     s.header_dir = "BokenEngine"
