@@ -17,8 +17,6 @@ class SceneFactoryTests: XCTestCase {
             do {
                 try super.playSceneAudio(sceneDescription: sceneDescription)
                 soundHasStarted = (sceneDescription.audio != nil)
-            } catch {
-                throw error
             }
         }
 
