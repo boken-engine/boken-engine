@@ -1,0 +1,80 @@
+{
+    "appTitle": "prototype",
+    "backgroundMusic": "Lord Of The Dawn - Jesse Gallagher",
+    "scenes": [
+        {
+            "sceneId": "TitleScene",
+            "elements": {
+                "elementsArray": [
+                    {
+                        "type": "image",
+                        "imageFile": "saturn",
+                        "posX": 0.5,
+                        "posY": 0.5,
+                        "scale": 0.75,
+                        "transformations": [
+                            {
+                                "type": "rotation",
+                                "toValue": 0.5,
+                                "duration": 50
+                            },
+                            {
+                                "type": "scale",
+                                "toValue": 1.25,
+                                "duration": 50
+                            },
+                        ]
+                    },
+                    {
+                        "type": "textLabel",
+                        "content": "Discover-UI",
+                        "posX": 0.5,
+                        "posY": 0.85,
+                        "fontSize": 28
+                    }
+                ]
+            },
+            "background": "black",
+            "navigation": "next"
+        },
+        {
+            "sceneId": "Introduction",
+            "elements": {
+                "elementsArray": [
+                    {
+                        "type": "textLabel",
+                        "content": "Introduction",
+                        "posX": 0.5,
+                        "posY": 0.85,
+                        "fontSize": 28
+                    }]
+            },
+            "background": "white",
+            "navigation": "both",
+            "branches": [
+                {
+                    "label": "back to init",
+                    "target": "TitleScene"
+                },
+                {
+                    "label": "go to end",
+                    "target": "Ending"
+                }
+            ],
+            "audio": "Sci Fi Vortex - uncompressed"
+        },
+        {
+            "sceneId": "Ending",
+            "elements": {
+                "elementsArray": [
+                    {
+                        "type": "textLabel",
+                        "content": "Ending",
+                        "posX": 0.5,
+                        "posY": 0.85,
+                        "fontSize": 28
+                    }]
+            },
+            "navigation": "back"
+        }]
+}
