@@ -34,7 +34,7 @@ class AudioManager {
         return isRunningTest() ?  try getAssetDataUsingPath(resourceName: resourceName) :
                                   try getAssetDataUsingBundle(resourceName: resourceName)
     }
-    
+
     func getAssetDataUsingBundle(resourceName: String) throws -> Data {
         let bundle = isRunningTest() ? Bundle(for: type(of: self)) : Bundle.main
         guard let asset = NSDataAsset(name: resourceName, bundle: bundle) else {
@@ -42,13 +42,13 @@ class AudioManager {
         }
         return asset.data
     }
-    
+
     func getAssetDataUsingPath(resourceName: String) throws -> Data {
         let filepath = Path(#file) + Path("../../../../Tests/BokenEngineTests/" + resourceName)
         do {
-            let path = filepath.normalize();
+            let path = filepath.normalize()
             if path.exists {
-                let contents:Data = try path.read()
+                let contents: Data = try path.read()
                 return contents
             } else {
                 throw AudioManagerError.resourceNotFound
@@ -72,15 +72,12 @@ class AudioManager {
     }
 
     func playBackgroundMusic(resourceName: String) throws -> Bool {
-        let backgroundMusicPlayer: AVAudioPlayer
         do {
             backgroundMusicPlayer = try createAudioPlayer(forResource: resourceName,
                                                           type: AVFileType.mp3.rawValue)!
-        } catch {
-            throw error
         }
-        backgroundMusicPlayer.numberOfLoops = -1
-        backgroundMusicPlayer.play()
+        backgroundMusicPlayer!.numberOfLoops = -1
+        backgroundMusicPlayer!.play()
         return true
     }
 
@@ -89,8 +86,6 @@ class AudioManager {
         do {
             soundPlayer = try createAudioPlayer(forResource: resourceName,
                                                 type: AVFileType.wav.rawValue)!
-        } catch {
-            throw error
         }
         soundPlayer.numberOfLoops = (looping ? -1 : 0)
         soundPlayer.play()

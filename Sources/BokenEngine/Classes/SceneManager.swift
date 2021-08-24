@@ -32,8 +32,6 @@ public class SceneManager {
         do {
             let storyParser = StoryParser()
             appDescription = try storyParser.decodeJSON(contents: storyContents)!
-        } catch {
-            throw error
         }
     }
 
@@ -62,8 +60,6 @@ public class SceneManager {
         if let backgroundMusicAssetName = appDescription.backgroundMusic {
             do {
                 _ = try audioManager.playBackgroundMusic(resourceName: backgroundMusicAssetName)
-            } catch {
-                throw error
             }
         }
     }
@@ -73,8 +69,6 @@ public class SceneManager {
         do {
             try loadCurrentScene()
             try startBackgroundMusic()
-        } catch {
-            throw error
         }
     }
 
@@ -97,8 +91,6 @@ public class SceneManager {
     public func loadCurrentScene() throws {
         do {
             _ = try sceneFactory.loadScene(description: getSceneDescription(sceneIndex: currentScene))
-        } catch {
-            throw error
         }
     }
 
@@ -108,8 +100,6 @@ public class SceneManager {
         }
         do {
             try loadCurrentScene()
-        } catch {
-            throw error
         }
     }
 
@@ -119,8 +109,6 @@ public class SceneManager {
         }
         do {
             try loadCurrentScene()
-        } catch {
-            throw error
         }
     }
 
@@ -128,8 +116,6 @@ public class SceneManager {
         do {
             try setCurrentScene(sceneId)
             try loadCurrentScene()
-        } catch {
-            throw error
         }
     }
 

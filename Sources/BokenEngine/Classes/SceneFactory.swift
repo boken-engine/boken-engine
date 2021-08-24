@@ -59,7 +59,6 @@ class SceneFactory {
 
     func createSceneElements(sceneDescription: SceneDescription, scene: SKScene) {
         let view = rootView as? SKView
-        let elementFactory = ElementFactory(view: view!, scene: scene)
         for elementDescription in sceneDescription.elements.elementsArray {
             let elementNode =  elementFactory.createElement(elementDescription: elementDescription)
             scene.addChild(elementNode!)
