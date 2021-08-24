@@ -40,12 +40,12 @@ class StoryParser {
             throw StoryParserError.resourceNotFound
         }
     }
-    
+
     private func readLocalFile(resourceName: String) throws -> String {
         let filepath = Path(#file) + Path("../../../../Tests/BokenEngineTests/Resources/" + resourceName + ".json")
-        let path = filepath.normalize();
+        let path = filepath.normalize()
         if path.exists {
-            let contents:String = try path.read()
+            let contents: String = try path.read()
             return contents
         } else {
             throw StoryParserError.resourceNotFound

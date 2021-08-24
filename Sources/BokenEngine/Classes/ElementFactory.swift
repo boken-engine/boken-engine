@@ -110,7 +110,7 @@ class ElementFactory {
         return CGFloat(applicableScale) * (useOnlyYAxis ? scaleFactor.y : self.maxScaleFactor)
     }
 
-    func getFinalShapeDimensions(description: ShapeDescription, useOnlyYAxis: Bool) -> CGPoint {
+    func getFinalShapeDimensions(description: ShapeDescription) -> CGPoint {
         let isHorizontal = isLandscapeMode()
         let width =  (isHorizontal && description.widthH != nil) ? description.widthH! : description.width
         let height = (isHorizontal && description.heightH != nil) ? description.heightH! : description.height
@@ -197,7 +197,7 @@ class ElementFactory {
 
     func getShapeNode(description: ShapeDescription) -> SKShapeNode {
         let position = getFinalElementPosition(description: description)
-        let size = getFinalShapeDimensions(description: description, useOnlyYAxis: false)
+        let size = getFinalShapeDimensions(description: description)
         let shape = SKShapeNode(rect: CGRect(x: Double(position.x),
                                              y: Double(position.y),
                                              width: Double(size.x),

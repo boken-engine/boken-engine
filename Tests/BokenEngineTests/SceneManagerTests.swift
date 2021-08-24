@@ -14,8 +14,6 @@ class TestableSceneManager: SceneManager {
         do {
             try super.startBackgroundMusic()
             musicHasStarted = (appDescription.backgroundMusic != nil)
-        } catch {
-            throw error
         }
     }
 
@@ -42,9 +40,6 @@ class SceneManagerTests: XCTestCase {
         } catch {
             XCTFail("Scene manager could not be created")
         }
-    }
-
-    override func tearDown() {
     }
 
     func testSceneDescriptionIsWhatExpected() {
