@@ -57,11 +57,7 @@ jobs:
 
           # 3. Perform the actual testing using the build previously made
           xcodebuild test-without-building -scheme "$scheme" -target "$target" -destination "platform=$platform,name=$device" -derivedDataPath ./output  -enableCodeCoverage YES
-
-      - name: Test Coverage
-        uses: sersoft-gmbh/swift-coverage-action@v2
-        with:
-            search-paths: ./output     
+          
   SwiftLint:
     runs-on: ubuntu-latest
     steps:
