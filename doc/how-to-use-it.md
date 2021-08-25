@@ -1,89 +1,35 @@
 # How to use it
 ## Table of Contents
 1. [Introduction](#introduction)
-2. [Download the framework](#download-the-framework)
-3. [Manually linking the framework to a project](#manually-linking-the-framework-to-a-project)
-4. [Link it using Carthage](#link-it-using-carthage)
-5. [Link it using CocoaPods](#link-it-using-cocoapods)
-6. [Framework basics](#framework-basics)
-7. [Relevant classes of the framework](#relevant-classes-of-the-framework)
-8. [Initializing the framework](#initializing-the-framework)
-9. [Creating the contents](#creating-the-contents)
-10. [Linking custom functions to buttons](#linking-custom-functions-to-buttons)
-11. [Running tests](#running-tests)
-12. [Building the application](#building-the-application)
-13. [Distribution](#distribution)
-14. [Sample application](#sample-application)
+2. [Download the package](#download-the-package)
+3. [Manually linking the package to a project](#manually-linking-the-package-to-a-project)
+4. [Framework basics](#framework-basics)
+5. [Relevant classes of the package](#relevant-classes-of-the-framework)
+6. [Initializing the package](#initializing-the-package)
+7. [Creating the contents](#creating-the-contents)
+8. [Linking custom functions to buttons](#linking-custom-functions-to-buttons)
+9. [Running tests](#running-tests)
+10. [Building the application](#building-the-application)
+11. [Distribution](#distribution)
+12. [Sample application](#sample-application)
 
 ## Introduction
 
 Boken Engine is a Framework written in Swift to make slide-based visual stories Apps. This document is a step-by-step guide to use it for creating your own project.
 
-## Manually linking the framework to a project
+## Manually linking the package to a project
 
-First, download or clone the framework XCode project from its [GitHub repository](https://github.com/boken-engine/boken-engine).
+First, download or clone the fpackage XCode project from its [GitHub repository](https://github.com/boken-engine/boken-engine).
 
-Now you have to link the framework to your XCode project. To do so, drag and drop the framework project file (BokenEngine.xcodeproj) to anywhere within the Project Navigator tree. Then, add the library to the "Link Binary with Libraries" section of the target's Build Phases tab, using the "+" icon.
+Now you have to link the package to your XCode project. To do so, drag and drop the package folder to anywhere within the Project Navigator tree. Then, add the library to the "Link Binary with Libraries" section of the target's Build Phases tab, using the "+" icon.
 
-This way, the framework will be built into your App, and also, you will be able to check the framework source files from within your project. This can be useful to check available methods of a class, enum values or the contents description structs.
+This way, the package will be built into your App, and also, you will be able to check the framework source files from within your project. This can be useful to check available methods of a class, enum values or the contents description structs.
 
-## Link it using Carthage
-
-Follow the official [Carthage procedure for building platform-specific framework bundles](https://github.com/Carthage/Carthage#if-youre-building-for-ios-tvos-or-watchos):
-
-- Add this line to your Cartfile (or create it with this content):
-```
-github "boken-engine/boken-engine" "master"
-```
-- Build the Carthage managed dependencies:
-```
-carthage update --platform iOS
-```
-
-- Add the generated Carthage/Build/iOS/BokenEngine.framework file to the "Linked Frameworks and Libraries" of your project "General" setup tab.
-
-- Create a file named input.xcfilelist and a file named output.xcfilelist
-
-- Put the generated framework path as content for the input.xcfilelist file:
-```
-$(SRCROOT)/Carthage/Build/iOS/BokenEngine.framework
-```
-
-- Put the destination path as content for the oputput.xcfilelist file:
-```
-$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/BokenEngine.framework
-```
-
-- On the "Build Phases" setup tab, create a new Run Script Phase using the "+" button and add this line on the script block:
-```
-/usr/local/bin/carthage copy-frameworks
-```
-
-- Add the input.xcfilelist to the "Input File Lists" section of the Carthage run script phase and the output.xcfilelist to the "Output File Lists" section of the Carthage run script phase
-
-## Link it using CocoaPods
-
-To add BokenEngine to a project using CocoaPods, create (or modify) a podFile with this content:
-
-```ruby
-target 'MyApp' do
-   pod 'BokenEngine'
-end
-```
-
-and install it with
-
-```bash
-pod install
-```
-
-This will create (or modify) a .xcworkspace in which the framework is built and ready to be referenced by the application project. For more information, please check [the CocoaPods guide](https://guides.cocoapods.org/using/using-cocoapods.html).
-
-## Framework basics
+## Package basics
 
 Please, before continuing, please check the ["Some concepts regarding the contents"](contents-creation-guide.md#section-concepts) section on the [Contents creation guide](contents-creation-guide.md), as some relevant termns are explained there. 
 
-## Relevant classes of the framework
+## Relevant classes of the package
 
 Those are the main classes used in the reading, process and parse of the contents:
 
@@ -92,7 +38,7 @@ Those are the main classes used in the reading, process and parse of the content
 - **ElementFactory**: Creates particular scene elements from its description, and sub-elements needed by them.
 - **StoryParser**: Processes a contents description from a string or a file and generates the corresponding parsed object.
 
-## Initializing the framework
+## Initializing the package
 
 The main class of the Engine is the SceneManager. 
 
