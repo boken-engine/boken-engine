@@ -42,7 +42,7 @@ jobs:
           if [ $target = default ]; then target=$(cat default); fi
 
           # 3. Perform the actual build (for testing) using the previously gatherer information
-          xcodebuild build-for-testing -scheme "$scheme" -target "$target" -destination "platform=$platform,name=$device" -derivedDataPath ./output
+          xcodebuild build-for-testing -scheme "$scheme" -target "$target" -destination "platform=$platform,name=$device" -derivedDataPath ./output 
       - name: Test
         env:
           scheme: ${{ 'default' }}
@@ -56,14 +56,8 @@ jobs:
           if [ $target = default ]; then target=$(cat default); fi
 
           # 3. Perform the actual testing using the build previously made
-          xcodebuild test-without-building -scheme "$scheme" -target "$target" -destination "platform=$platform,name=$device" -derivedDataPath ./output
-
-      - name: Test Coverage
-        uses: maxep/xcodebuild-lcov-action@0.1.0
-        with:
-            derived-data-path: ./output
-            target: BokenEngine.framework
-            output-file: ./output/lcov.info          
+          xcodebuild test-without-building -scheme "$scheme" -target "$target" -destination "platform=$platform,name=$device" -derivedDataPath ./output  -enableCodeCoverage YES
+          
   SwiftLint:
     runs-on: ubuntu-latest
     steps:
