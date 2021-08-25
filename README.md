@@ -1,13 +1,13 @@
 # Boken Engine
 ![Platform iOS](https://img.shields.io/cocoapods/p/BokenEngine) ![Licence MPL 2.0](https://img.shields.io/github/license/boken-engine/boken-engine) ![badge](https://action-badges.now.sh/boken-engine/boken-engine)
 
-An iOS Swift framework for creating slides-based, non-linear visual stories and presentations.
+An iOS/MacOS Swift Package for creating slides-based, non-linear visual stories and presentations.
 
 https://www.boken-engine.dev
 
 ## 1. Description
 
-BOKEN (from Swedish: The Book; also from Japanese 冒険 - Bōken: Adventure) ENGINE is a Swift Framework with which any user, only with a few lines of codes, can generate full fledged visual stories or slide based presentations for iOS devices. It is based on SpriteKit.
+BOKEN (from Swedish: The Book; also from Japanese 冒険 - Bōken: Adventure) ENGINE is a Swift Package with which any user, only with a few lines of codes, can generate full fledged visual stories or slide based presentations for iOS and MACOs devices. It is based on SpriteKit.
 
 The user just has to provide a human readable JSON description with some predefined properties, the image and sound assets, and initialize the framework within the project with just a few lines.
 
@@ -24,22 +24,22 @@ The user just has to provide a human readable JSON description with some predefi
 
 ## 4. Necessary knowledge
 
-Boken Engine is targeted to both experienced programmer and people that wants to create their own App but does not have lots of coding knowledge.
+Boken Engine is targeted to both experienced programmers and people that wants to create their own App but does not have lots of coding knowledge.
 Those are the basic skills a user needs to have in order to use Boken Engine:
 
 - Know how to create a XCode project and how to use the XCode UI
-- Know how to link a framework (this is explained on the next section)
-- Know how to publish an application (although there are lots of pages detailing how to do this)
+- Know how to link the Package (this is explained on the next section)
+- If the application is to be published, know how to do it (although there are lots of pages detailing how to do this)
 
-Once the project is created and the framework is linked, a few lines of code must be written, as is explained in the next section.
+Once the project is created and the Package is linked, a few lines of code must be written, as is explained in the next section.
 
 ## 5. Dependencies
 
-Boken Engine only uses built-in iOS libraries: UIKit, SceneKit and SpriteKit. No additional downloads/instalations are needed.  
+Boken Engine uses built-in iOS libraries UIKit, SceneKit and SpriteKit and [PathKit](https://github.com/kylef/PathKit).
 
 ## 6. How to use it
 
-Boken Engine is not a stand-alone application. This is a Framework: a piece of software intended to be used within another Application that will make use of its features. Currently, only supports iOS (iPhone + iPad) applications.
+Boken Engine is not a stand-alone application. This is a Package: a piece of software intended to be used within another Application that will make use of its features.
 
 ### 6.1. Basic usage
 
@@ -57,10 +57,9 @@ Boken Engine is not a stand-alone application. This is a Framework: a piece of s
 
 4. Link the framework with your project. You can do it manually or using Carthage/CocoaPods if you prefer.
 
-    *Manually*
-
     - Download Boken from its [source repository](https://github.com/boken-engine/boken-engine). Save it in any folder of your hard drive.
-    - On the project you want to link Boken, drag and drop the framework project file (BokenEngine.xcodeproj) to anywhere within the Project Navigator tree.
+  
+    - On the project you want to link Boken, drag and drop the Package Folder to anywhere within the Project Navigator tree.
 
         ![Drag framework project file to your project](./doc/images/how-to-use-04-drag-framework-project-file.png)
 
@@ -68,66 +67,12 @@ Boken Engine is not a stand-alone application. This is a Framework: a piece of s
 
         ![Link Binary with Libraries](./doc/images/how-to-use-05-add-the-library-to-link-binary-with-libraries.png)
 
-    - On the pop up screen you should see BokenEngine.framework available to be added. Just click on the "Add" button to link it to your project.
+    - On the pop up screen you should see BokenEngine available to be added. Just click on the "Add" button to link it to your project.
 
         ![Add framework](./doc/images/how-to-use-06-choose-the-framework-to-add.png)
 
-    *Using [Carthage](https://github.com/Carthage/Carthage)*
 
-    Follow the official [Carthage procedure for building platform-specific framework bundles](https://github.com/Carthage/Carthage#if-youre-building-for-ios-tvos-or-watchos):
-
-    - Add this line to your Cartfile (or create it with this content):
-        ```
-        github "boken-engine/boken-engine" "master"
-        ```
-
-    - Build the Carthage managed dependencies:
-        ```
-        carthage update --platform iOS
-        ```
-
-    - Add the generated Carthage/Build/iOS/BokenEngine.framework file to the "Linked Frameworks and Libraries" of your project "General" setup tab.
-
-    - Create a file named input.xcfilelist and a file named output.xcfilelist
-
-    - Put the generated framework path as content for the input.xcfilelist file:
-        ```
-        $(SRCROOT)/Carthage/Build/iOS/BokenEngine.framework
-        ```
-
-    - Put the destination path as content for the oputput.xcfilelist file:
-        ```
-        $(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/BokenEngine.framework
-        ```
-
-    - On the "Build Phases" setup tab, create a new Run Script Phase using the "+" button and add this line on the script block:
-        ```
-        /usr/local/bin/carthage copy-frameworks
-        ```
-
-    - Add the input.xcfilelist to the "Input File Lists" section of the Carthage run script phase and the output.xcfilelist to the "Output File Lists" section of the Carthage run script phase
-
-    *Using [CocoaPods](https://cocoapods.org/)*
-
-    To add BokenEngine to a project using CocoaPods:
-
-    - Create (or modify) a podFile with this content:
-
-        ```ruby
-        target 'MyApp' do
-        pod 'BokenEngine'
-        end
-        ```
-
-    - and install it with
-
-        ```bash
-        pod install
-        ```
-
-    This will create (or modify) a .xcworkspace in which the framework is built and ready to be referenced by the application project. For more information, please check [the CocoaPods guide](https://guides.cocoapods.org/using/using-cocoapods.html).
-
-5. Initialize the framework for its usage with two final steps:
+5. Initialize the Package for its usage with two final steps:
 
     - Instantiate SceneManager class.
 
@@ -287,7 +232,7 @@ For more information about content creation, refer to the [Content Creation Guid
 
 ### 6.3 How to run tests
 
-To run the Framework tests, open its project on XCode and press Command + U. More about running tests and checking results can be found on the [official Apple documentation](https://developer.apple.com/library/archive/documentation/DeveloperTools/Conceptual/testing_with_xcode/chapters/05-running_tests.html). 
+To run the Package tests, open its project on XCode and press Command + U. More about running tests and checking results can be found on the [official Apple documentation](https://developer.apple.com/library/archive/documentation/DeveloperTools/Conceptual/testing_with_xcode/chapters/05-running_tests.html). 
 
 ### 6.4 How to write and run additional tests
 
@@ -342,6 +287,6 @@ Yes, you can, but please, check the [License details](LICENSE) to know the detai
 
 ## 9. License
 
-The Boken Engine framework is available under the [Mozilla Public License Version 2.0](https://mozilla.org/MPL/2.0/).
+The Boken Engine Package is available under the [Mozilla Public License Version 2.0](https://mozilla.org/MPL/2.0/).
 
 If you want to know more about this choice you can check the documentation about this on [choose-a-license.md](/doc/choose-a-license.md).
