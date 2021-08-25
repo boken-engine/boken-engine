@@ -42,7 +42,7 @@ jobs:
           if [ $target = default ]; then target=$(cat default); fi
 
           # 3. Perform the actual build (for testing) using the previously gatherer information
-          xcodebuild build-for-testing -scheme "$scheme" -target "$target" -destination "platform=$platform,name=$device" -derivedDataPath ./output  -enableCodeCoverage YES
+          xcodebuild build-for-testing -scheme "$scheme" -target "$target" -destination "platform=$platform,name=$device" -derivedDataPath ./output 
       - name: Test
         env:
           scheme: ${{ 'default' }}
