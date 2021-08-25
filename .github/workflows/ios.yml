@@ -59,9 +59,9 @@ jobs:
           xcodebuild test-without-building -scheme "$scheme" -target "$target" -destination "platform=$platform,name=$device" -derivedDataPath ./output  -enableCodeCoverage YES
 
       - name: Test Coverage
-        uses: maxep/spm-lcov-action@0.3.0
+        uses: sersoft-gmbh/swift-coverage-action@v2
         with:
-            output-file: ./output/lcov.info          
+            search-paths: ./output     
   SwiftLint:
     runs-on: ubuntu-latest
     steps:
