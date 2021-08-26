@@ -42,7 +42,7 @@ jobs:
           if [ $target = default ]; then target=$(cat default); fi
 
           # 3. Perform the actual build (for testing) using the previously gatherer information
-          xcodebuild build-for-testing -scheme "$scheme" -target "$target" -destination "platform=$platform,name=$device" -derivedDataPath ./output 
+          xcodebuild build-for-testing -scheme "$scheme" -target "$target" -destination "platform=$platform,name=$device" 
       - name: Test
         env:
           scheme: ${{ 'default' }}
@@ -56,7 +56,7 @@ jobs:
           if [ $target = default ]; then target=$(cat default); fi
 
           # 3. Perform the actual testing using the build previously made
-          xcodebuild test-without-building -scheme "$scheme" -target "$target" -destination "platform=$platform,name=$device" -derivedDataPath ./output  -enableCodeCoverage YES
+          xcodebuild test-without-building -scheme "$scheme" -target "$target" -destination "platform=$platform,name=$device"
           
   SwiftLint:
     runs-on: ubuntu-latest
