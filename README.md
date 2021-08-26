@@ -55,13 +55,13 @@ Boken Engine is not a stand-alone application. This is a Package: a piece of sof
 
 ![Choose options for your new project](./doc/images/how-to-use-03-project-navigator-tree.png)
 
-4. Link the framework with your project. You can do it manually or using Carthage/CocoaPods if you prefer.
+4. Link the package with your project. You can do it manually or using Carthage/CocoaPods if you prefer.
 
     - Download Boken from its [source repository](https://github.com/boken-engine/boken-engine). Save it in any folder of your hard drive.
   
     - On the project you want to link Boken, drag and drop the Package Folder to anywhere within the Project Navigator tree.
 
-        ![Drag framework project file to your project](./doc/images/how-to-use-04-drag-framework-project-file.png)
+        ![Drag package project file to your project](./doc/images/how-to-use-04-drag-framework-project-file.png)
 
     - Add the library to the "Link Binary with Libraries" section of the target's Build Phases tab, using the "+" icon
 
@@ -69,7 +69,7 @@ Boken Engine is not a stand-alone application. This is a Package: a piece of sof
 
     - On the pop up screen you should see BokenEngine available to be added. Just click on the "Add" button to link it to your project.
 
-        ![Add framework](./doc/images/how-to-use-06-choose-the-framework-to-add.png)
+        ![Add package](./doc/images/how-to-use-06-choose-the-framework-to-add.png)
 
 
 5. Initialize the Package for its usage with two final steps:
