@@ -281,6 +281,8 @@ Not at the moment. It relies on XCode and associated libraries (SpriteKit, Scene
 
 Yes, you can check and fork [15 Universe Facts](https://github.com/boken-engine/15-universe-facts) as a sample application. It includes a GitHub Actions workflow that builds and generates an IPA file.
 
+Also, please check (and enjoy) [Iakkai Saga: The Curse of Blood](https://github.com/boken-engine/iakkai-saga-the-curse-of-blood), a fantasy-packed adventure game full of nice art and a captivating story.
+
 - Can I use it for commercial projects?
 
 Yes, you can, but please, check the [License details](LICENSE) to know the details.
