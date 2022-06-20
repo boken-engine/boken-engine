@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     name: Build and Test default scheme using any available iPhone simulator
-    runs-on: macos-latest
+    runs-on: macos-12
 
     steps:
       - name: Checkout
@@ -51,6 +51,7 @@ jobs:
 
           # 3. Perform the actual build (for testing) using the previously gatherer information
           xcodebuild build-for-testing -scheme "$scheme" -target "$target" -destination "platform=$platform,name=$device" 
+      
       - name: Test
         env:
           scheme: ${{ 'default' }}
