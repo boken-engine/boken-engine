@@ -23,10 +23,11 @@ jobs:
       - name: Set Default Scheme
         run: |
           # Lists the targets and configurations in a project, or the schemes in a workspace
-          xcodebuild -list -json
+          # Why redirect error ouput? https://github.com/boken-engine/boken-engine/issues/139
+          xcodebuild -list -json 2>/dev/null
 
           # 1. Get available schemes in the project
-          scheme_list=$(xcodebuild -list -json | tr -d "\n")
+          scheme_list=$(xcodebuild -list -json 2>/dev/null | tr -d "\n")
           
           # 2. Get the first scheme and target name parsing the JSON with Ruby and selecting the first element in the matrix
           default=$(echo $scheme_list | ruby -e "require 'json'; puts JSON.parse(STDIN.gets)['project']['schemes'][0]")
