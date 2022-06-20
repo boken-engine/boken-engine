@@ -56,6 +56,7 @@ jobs:
           if [ $target = default ]; then target=$(cat default_target); fi
 
           # 3. Perform the actual build (for testing) using the previously gatherer information
+          swift package resolve
           xcodebuild build-for-testing -scheme "$scheme" -target "$target" -destination "platform=$platform,name=$device" 
       
       - name: Test
@@ -71,6 +72,7 @@ jobs:
           if [ $target = default ]; then target=$(cat default_target); fi
 
           # 3. Perform the actual testing using the build previously made
+          swift package resolve
           xcodebuild test-without-building -scheme "$scheme" -target "$target" -destination "platform=$platform,name=$device"
           
   SwiftLint:
