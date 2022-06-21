@@ -30,7 +30,7 @@ jobs:
           scheme_list=$(xcodebuild -list -json 2>/dev/null | tr -d "\n")
           
           # 2. Get the first scheme name parsing the JSON with Ruby and selecting the first element in the matrix
-          default_scheme=$(echo $scheme_list | ruby -e "require 'json'; puts JSON.parse(STDIN.gets)['project']['schemes'][0]")
+          default_scheme=$(echo $scheme_list | ruby -e "require 'json'; puts JSON.parse(STDIN.gets)['workspace']['schemes'][0]")
 
           # 3. Store and displays the default scheme
           echo $default_scheme | cat >default_scheme
