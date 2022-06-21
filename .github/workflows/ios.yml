@@ -20,8 +20,6 @@ jobs:
           xcodebuild -version
           softwareupdate --list
 
-      - uses: mxcl/xcodebuild@v1    
-
       - name: Set Default Scheme
         run: |
           # Lists the targets and configurations in a project, or the schemes in a workspace
