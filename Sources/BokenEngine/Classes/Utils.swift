@@ -36,7 +36,22 @@ func getDeviceOrientation() -> DeviceOrientation {
     #if targetEnvironment(macCatalyst)
         return DeviceOrientation.horizontal
     #else
-    if UIApplication.shared.statusBarOrientation.isLandscape {
+
+    /*
+     * Given the application does not support multiple scenes,
+     * we take the orientation from the first window scene.
+     *
+     * We cannot use: "UIDevice.current.orientation.isLandscape"
+     * because the device orientation may not be the same as
+     * the application window orientation.
+     */
+
+    guard let orientation = UIApplication.shared.windows.first?.windowScene?.interfaceOrientation else {
+        // Could not obtain UIInterfaceOrientation from a valid windowScene
+        return DeviceOrientation.vertical
+    }
+
+    if (orientation.isLandscape) {
         return DeviceOrientation.horizontal
     } else {
         return DeviceOrientation.vertical
