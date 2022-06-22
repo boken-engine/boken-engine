@@ -31,3 +31,7 @@ jobs:
 
           # 3. Perform the actual testing using the previous build
           xcodebuild test-without-building -scheme "BokenEngine" -destination "platform=iOS Simulator,name=$device"
+
+      - name: Build and test with swift
+        run: |
+          swift build -Xswiftc "-sdk" -Xswiftc "`xcrun --sdk iphonesimulator --show-sdk-path`" -Xswiftc "-target" -Xswiftc "arm64-apple-ios15.4-simulator"
