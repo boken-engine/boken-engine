@@ -1,5 +1,4 @@
-name: Build, test, lint and coverage measurement
-
+name: Test
 on:
   push:
     branches: [ master ]
@@ -61,30 +60,3 @@ jobs:
 
           # 3. Perform the actual testing using the build previously made
           xcodebuild test-without-building -scheme "$scheme" -target "$target" -destination "platform=$platform,name=$device"
-          
-  SwiftLint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: GitHub Action for SwiftLint
-        uses: norio-nomura/action-swiftlint@3.2.1
-  Tailor:
-    runs-on: macos-latest
-    steps:
-      - name: Install Tailor
-        run: |          
-          brew update
-          brew install tailor   
-      - name: Checkout
-        uses: actions/checkout@v3      
-      - name: Static analysis using Tailor
-        run: tailor .
-  Lizard:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Install Lizard
-        run: pip install lizard      
-      - name: Checkout
-        uses: actions/checkout@v3  
-      - name: Code quality using Lizard
-        run: lizard
