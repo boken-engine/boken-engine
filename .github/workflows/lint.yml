@@ -1,0 +1,38 @@
+name: Lint
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+        
+  SwiftLint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: GitHub Action for SwiftLint
+        uses: norio-nomura/action-swiftlint@3.2.1
+
+  Tailor:
+    runs-on: macos-latest
+    steps:
+      - name: Install Tailor
+        run: |          
+          brew update
+          brew install tailor   
+      - name: Checkout
+        uses: actions/checkout@v3      
+      - name: Static analysis using Tailor
+        run: tailor .
+
+  Lizard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Lizard
+        run: pip install lizard      
+      - name: Checkout
+        uses: actions/checkout@v3  
+      - name: Code quality using Lizard
+        run: lizard
