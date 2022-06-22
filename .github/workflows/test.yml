@@ -14,8 +14,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Show xcodebuild version
-        run: xcodebuild -version
+      - name: Debug
+        run: |
+          xcodebuild -version
+          xcodebuild -list -json
+          xcrun xctrace list devices
+          xcrun --sdk iphonesimulator --show-sdk-path
 
       - name: Set Default Scheme
         run: |
