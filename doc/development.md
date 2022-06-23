@@ -10,6 +10,37 @@ swift build \
     -Xswiftc "-target" -Xswiftc "arm64-apple-ios15.4-simulator"
 ```
 
+## Testing
+
+Run tests with `xcodebuild`:
+
+```s
+xcodebuild test \
+    -scheme BokenEngine \
+    -destination "platform=iOS Simulator,name=iPhone 11" \
+    -enableCodeCoverage YES \
+    -derivedDataPath ".DerivedData"
+```
+
+Show coverage report:
+
+```s
+xcodebuild test \
+    -scheme BokenEngine \
+    -destination "platform=iOS Simulator,name=iPhone 11" \
+    -enableCodeCoverage YES \
+    -derivedDataPath ".DerivedData"
+mkdir -p .coverage    
+ld -r \
+    -o .coverage/CombinedObject.o .DerivedData/Build/Intermediates.noindex/BokenEngine.build/Debug-iphonesimulator/BokenEngine.build/Objects-normal/arm64/*.o
+xcrun llvm-cov report \
+    --format=text \
+    --instr-profile=".DerivedData/Build/ProfileData/860AB2C1-6615-42E7-93A8-9067DF75E7BA/Coverage.profdata" \
+    --object=".coverage/CombinedObject.o"
+```
+
+> NOTICE: you have to change the ProfileData folder `860AB2C1-6615-42E7-93A8-9067DF75E7BA`.
+
 ## Commands
 
 Show destinations (where you can run the package):
