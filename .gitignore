@@ -94,3 +94,7 @@ iOSInjectionProject/
 
 # Swift Package Manager
 .swiftpm/
+
+# Testing
+.DerivedData/
+.coverage/

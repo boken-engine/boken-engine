@@ -23,15 +23,27 @@ jobs:
 
       - name: Build and test with xcodebuild
         run: |
-          # 1. Get the list of available iPhone simulators, and get the first one
+          # Get the list of available iPhone simulators, and get the first one
           device=`xcrun xctrace list devices | grep -oE 'iPhone.*?[^\(]+' | sed -e "s/ Simulator//" | head -1 | awk '{$1=$1;print}'`
 
-          # 2. Perform the actual build (for testing)
-          xcodebuild build-for-testing -scheme "BokenEngine" -destination "platform=iOS Simulator,name=$device"
+          # Test with coverage
+          xcodebuild test \
+              -scheme BokenEngine \
+              -destination "platform=iOS Simulator,name=$device" \
+              -enableCodeCoverage YES \
+              -derivedDataPath ".DerivedData"
+          
+          # Merge objects into a single one
+          mkdir -p .coverage  
+          ld -r \
+              -o .coverage/CombinedObject.o .DerivedData/Build/Intermediates.noindex/BokenEngine.build/Debug-iphonesimulator/BokenEngine.build/Objects-normal/arm64/*.o
+          
+          # Show coverage for the merged object
+          xcrun llvm-cov report \
+              --format=text \
+              --instr-profile=".DerivedData/Build/ProfileData/860AB2C1-6615-42E7-93A8-9067DF75E7BA/Coverage.profdata" \
+              --object=".coverage/CombinedObject.o"
 
-          # 3. Perform the actual testing using the previous build
-          xcodebuild test-without-building -scheme "BokenEngine" -destination "platform=iOS Simulator,name=$device"
-
-      - name: Build and test with swift
+      - name: Build with swift
         run: |
           swift build -Xswiftc "-sdk" -Xswiftc "`xcrun --sdk iphonesimulator --show-sdk-path`" -Xswiftc "-target" -Xswiftc "arm64-apple-ios15.4-simulator"
